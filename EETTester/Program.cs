@@ -42,6 +42,9 @@ namespace EETTester
 
 			//client.ClientCredentials.ClientCertificate.SetCertificate(StoreLocation.CurrentUser, StoreName.My, X509FindType.FindBySubjectName, "CZ00000019");
 
+			
+
+			var endpointBinding = client.Endpoint.Binding;
 
 			//EETService service = new EETService();
 			ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -84,6 +87,7 @@ namespace EETTester
 			data.pouzit_zboz3 = 189;
 
 			data.urceno_cerp_zuct = 324;
+			data.urceno_cerp_zuctSpecified = true;
 			data.zakl_dan1 = -820.92M;
 			data.zakl_dan2 = -3538.20M;
 			data.zakl_dan3 = -9756.46M;
