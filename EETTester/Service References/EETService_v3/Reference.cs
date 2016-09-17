@@ -17,7 +17,8 @@ namespace EETTester.EETService_v3 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://fs.mfcr.cz/eet/OdeslaniTrzby", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        EETTester.EETService_v3.OdeslaniTrzbyResponse OdeslaniTrzby(EETTester.EETService_v3.OdeslaniTrzbyRequest request);
+				[EETFormatMessageAttribute]
+				EETTester.EETService_v3.OdeslaniTrzbyResponse OdeslaniTrzby(EETTester.EETService_v3.OdeslaniTrzbyRequest request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="http://fs.mfcr.cz/eet/OdeslaniTrzby", ReplyAction="*")]
