@@ -1,22 +1,28 @@
 ﻿
 
 using System;
+using System.Globalization;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 using System.Xml;
+using EETTester.EETService_v3;
 
 namespace EETTester
 {
 	public class EETMessage : Message
 	{
-		private string bodyKey = $"Body-{Guid.NewGuid():D}";
-		
 		private readonly Message message;
+		private readonly object[] parameters;
 
-		public EETMessage(Message message)
+		public static IFormatProvider EETDecimalFormat = new NumberFormatInfo() { CurrencyDecimalSeparator = "." };
+		public const string EETDateFormat = "yyyy-MM-ddTHH:mm:ssK";
+
+
+		public EETMessage(Message message, object[] parameters)
 		{
 			this.message = message;
+			this.parameters = parameters;
 		}
 		public override MessageHeaders Headers
 		{
@@ -38,8 +44,13 @@ namespace EETTester
 
 		protected override void OnWriteStartBody(XmlDictionaryWriter writer)
 		{
-			writer.WriteStartElement("Body", "http://schemas.xmlsoap.org/soap/envelope/");
-			writer.WriteAttributeString("Id", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd", bodyKey);
+			//base.OnWriteStartBody(writer);
+			//s: Envelope[xmlns: s = http://www.w3.org/2003/05/soap-envelope xmlns:u=http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd ]
+
+			 writer.WriteStartElement("Body", "http://www.w3.org/2003/05/soap-envelope");
+			writer.WriteXmlnsAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+			writer.WriteXmlnsAttribute("xsd", "http://www.w3.org/2001/XMLSchema");
+			//writer.WriteAttributeString("Id", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd", bodyKey);
 		}
 		protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
 		{
@@ -52,30 +63,77 @@ namespace EETTester
 			//	</ KontrolniKody >
 			//</ Trzba >
 
-			message.WriteBodyContents(writer);
+			//message.WriteBodyContents(writer);
+
+			var message = parameters[0] as OdeslaniTrzbyRequest;
+
 			writer.WriteElement("Trzba", (t =>
 			{
 				t.WriteElement("Hlavicka", (h) =>
 				{
-					h.WriteAttributeString("uuid_zpravy", "b11a6061-6f8a-4f51-86a4-0e164ffa5a37");
-					h.WriteAttributeString("dat_odesl", "b11a6061-6f8a-4f51-86a4-0e164ffa5a37");
-					h.WriteAttributeString("prvni_zaslani", "true");
+					var header = message.Hlavicka;
+					h.WriteEETAttribute("uuid_zpravy", header.uuid_zpravy);
+					h.WriteEETAttribute("dat_odesl", header.dat_odesl);
+					h.WriteEETAttribute("prvni_zaslani", header.prvni_zaslani);
+
+					h.WriteEETAttribute("overeni", header.overeni, () => header.overeniSpecified);
 				});
 
 				t.WriteElement("Data", d =>
 				{
-					d.WriteAttributeString("dic_popl", "CZ00000019");
-					d.WriteAttributeString("dic_poverujiciho", "CZ683555118");
-					d.WriteAttributeString("id_provoz", "273");
-					d.WriteAttributeString("id_pokl", "/5546/RO24");
-					d.WriteAttributeString("porad_cis", "CZ00000019");
-					d.WriteAttributeString("dat_trzby", "CZ00000019");
-					d.WriteAttributeString("celk_trzba", "CZ00000019");
-					d.WriteAttributeString("urceno_cerp_zuct", "CZ00000019");
+					var data = message.Data;
+
+					d.WriteEETAttribute("id_provoz", data.id_provoz);
+					d.WriteEETAttribute("celk_trzba", data.celk_trzba);
+					d.WriteEETAttribute("dat_trzby", data.dat_trzby);
+					d.WriteEETAttribute("dic_popl", data.dic_popl);
+					d.WriteEETAttribute("dic_poverujiciho", data.dic_poverujiciho);
+					d.WriteEETAttribute("id_pokl", data.id_pokl);
+					d.WriteEETAttribute("porad_cis", data.porad_cis);
+					d.WriteEETAttribute("rezim", data.rezim);
+
+					d.WriteEETAttribute("urceno_cerp_zuct", data.urceno_cerp_zuct, () => data.urceno_cerp_zuctSpecified);
+					d.WriteEETAttribute("cerp_zuct", data.cerp_zuct, () => data.cerp_zuctSpecified);
+					d.WriteEETAttribute("cest_sluz", data.cest_sluz, () => data.cest_sluzSpecified);
+					d.WriteEETAttribute("dan1", data.dan1, () => data.dan1Specified);
+					d.WriteEETAttribute("dan2", data.dan2, () => data.dan2Specified);
+					d.WriteEETAttribute("dan3", data.dan3, () => data.dan3Specified);
+					d.WriteEETAttribute("pouzit_zboz1", data.pouzit_zboz1, () => data.pouzit_zboz1Specified);
+					d.WriteEETAttribute("pouzit_zboz2", data.pouzit_zboz2, () => data.pouzit_zboz2Specified);
+					d.WriteEETAttribute("pouzit_zboz3", data.pouzit_zboz3, () => data.pouzit_zboz3Specified);
+					
+					d.WriteEETAttribute("zakl_dan1", data.zakl_dan1, () => data.zakl_dan1Specified);
+					d.WriteEETAttribute("zakl_dan2", data.zakl_dan2, () => data.zakl_dan2Specified);
+					d.WriteEETAttribute("zakl_dan3", data.zakl_dan3, () => data.zakl_dan3Specified);
+					d.WriteEETAttribute("zakl_nepodl_dph", data.zakl_nepodl_dph, () => data.zakl_nepodl_dphSpecified);
+
+				});
+
+				t.WriteElement("KontrolniKody", k =>
+				{
+					var cc = message.KontrolniKody;
+
+					k.WriteElement("pkp", p =>
+					{
+						p.WriteAttributeString("cipher", cc.pkp.cipher.ToString());
+						p.WriteAttributeString("digest", cc.pkp.digest.ToString());
+						p.WriteAttributeString("encoding", cc.pkp.encoding.ToString());
+						p.WriteString(cc.pkp.Text[0]);
+					});
+
+					k.WriteElement("bkp", b =>
+					{
+						b.WriteAttributeString("digest", cc.bkp.digest.ToString());
+						b.WriteAttributeString("encoding", cc.bkp.encoding.ToString());
+						b.WriteString(cc.bkp.Text[0]);
+					});
 				});
 			}), "http://fs.mfcr.cz/eet/schema/v3");
-			
+
 		}
+
+
+
 		protected override void OnWriteStartEnvelope(XmlDictionaryWriter writer)
 		{
 			base.OnWriteStartEnvelope(writer);
@@ -88,13 +146,60 @@ namespace EETTester
 
 	}
 
-	public static class XmlChainHelper
+	public static class XmlHelper
 	{
 		public static void WriteElement(this XmlDictionaryWriter writer, string name, Action<XmlDictionaryWriter> insideElement, string ns = "")
 		{
-			writer.WriteStartElement(name, ns);
+			if(string.IsNullOrEmpty(ns))
+				writer.WriteStartElement(name);
+			else
+			{
+				writer.WriteStartElement(name, ns);
+			}
 			insideElement(writer);
 			writer.WriteEndElement();
+		}
+
+		public static void WriteEETAttribute(this XmlDictionaryWriter writer, string key, object value, Func<bool> isSpecifiedFunc = null)
+		{
+			if (isSpecifiedFunc != null && !isSpecifiedFunc())
+			{
+				return;
+			}
+
+			string v = "";
+			switch (value.GetType().Name.ToLower())
+			{
+				case "string":
+					{
+						v = (string)value;
+						break;
+					}
+				case "boolean":
+				case "int32":
+					{
+						v = value.ToString().ToLower();
+						break;
+					}
+				case "datetime":
+					{
+						v = ((DateTime)value).ToString(EETMessage.EETDateFormat);
+						break;
+					}
+				case "decimal":
+					{
+						v = ((decimal)value).ToString("F2", EETMessage.EETDecimalFormat);
+						break;
+					}
+				case "pkpelementtype":
+				case "bkpelementtype":
+				{
+						v = ((PkpElementType)value).Text[0];
+						break;
+				}
+			}
+
+			writer.WriteAttributeString(key, v);
 		}
 	}
 
@@ -122,10 +227,8 @@ namespace EETTester
 
 		public Message SerializeRequest(MessageVersion messageVersion, object[] parameters)
 		{
-			Message.CreateMessage(MessageVersion.Soap12,)
-
 			var message = this.formatter.SerializeRequest(messageVersion, parameters);
-			return new EETMessage(message);
+			return new EETMessage(message, parameters);
 		}
 
 		public object DeserializeReply(Message message, object[] parameters)
@@ -149,7 +252,7 @@ namespace EETTester
 				((IOperationBehavior)serializerBehavior).ApplyClientBehavior(operationDescription, clientOperation);
 
 			IClientMessageFormatter innerClientFormatter = clientOperation.Formatter;
-			
+
 			clientOperation.Formatter = new EETMessageFormatter(innerClientFormatter);
 		}
 

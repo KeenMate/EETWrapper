@@ -75,23 +75,37 @@ namespace EETTester
 			data.rezim = 0;
 
 			data.celk_trzba = 34113.00M;
+
 			data.cerp_zuct = 679;
+			data.cerp_zuctSpecified = true;
 			data.cest_sluz = 5460;
+			data.cest_sluzSpecified = true;
 			data.dan1 = -172.39M;
+			data.dan1Specified = true;
 			data.dan2 = -530.73M;
-			data.dan3 = -975.65M;
+			data.dan2Specified = true;
+			data.dan3 = 975.65M;
+			data.dan3Specified = true;
 			data.dat_trzby = new DateTime(2016, 08, 05, 0, 30, 12, DateTimeKind.Local);
 
 			data.pouzit_zboz1 = 784;
+			data.pouzit_zboz1Specified = true;
 			data.pouzit_zboz2 = 967;
+			data.pouzit_zboz2Specified = true;
 			data.pouzit_zboz3 = 189;
+			data.pouzit_zboz3Specified = true;
+
 
 			data.urceno_cerp_zuct = 324;
 			data.urceno_cerp_zuctSpecified = true;
 			data.zakl_dan1 = -820.92M;
+			data.zakl_dan1Specified = true;
 			data.zakl_dan2 = -3538.20M;
+			data.zakl_dan2Specified = true;
 			data.zakl_dan3 = -9756.46M;
+			data.zakl_dan3Specified = true;
 			data.zakl_nepodl_dph = 3036.00M;
+			data.zakl_nepodl_dphSpecified = true;
 
 			//TimeZoneInfo tzi = TimeZoneInfo.CreateCustomTimeZone("+2", TimeSpan.FromHours(2),"+2:00", "+2:00" );
 
@@ -155,7 +169,7 @@ namespace EETTester
 		{
 			//http://stackoverflow.com/questions/7444586/how-can-i-sign-a-file-using-rsa-and-sha256-with-net
 			string sign =
-					$"{data.dic_popl}|{data.id_provoz}|{data.id_pokl}|{data.porad_cis}|{data.dat_trzby.ToString("yyyy-MM-ddTHH:mm:sszzz").Replace("+03:00", "+02:00")}|{data.celk_trzba}";
+					$"{data.dic_popl}|{data.id_provoz}|{data.id_pokl}|{data.porad_cis}|{data.dat_trzby.ToString("yyyy-MM-ddTHH:mm:sszzz").Replace("+03:00", "+02:00")}|{data.celk_trzba.ToString(EETMessage.EETDecimalFormat)}";
 
 
 			// Note that this will return a Basic crypto provider, with only SHA-1 support
