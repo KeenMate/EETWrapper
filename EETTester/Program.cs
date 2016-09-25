@@ -10,7 +10,8 @@ using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Services.Description;
-using EETTester.EETService_v3;
+using EETWrapper.EETService_v3;
+using EETWrapper.ServiceHelpers;
 
 namespace EETTester
 {
@@ -38,11 +39,9 @@ namespace EETTester
 				;
 			store.Close();
 
-			EETService_v3.EETClient client = new EETClient();
+			EETClient client = new EETClient();
 
 			//client.ClientCredentials.ClientCertificate.SetCertificate(StoreLocation.CurrentUser, StoreName.My, X509FindType.FindBySubjectName, "CZ00000019");
-
-			
 
 			var endpointBinding = client.Endpoint.Binding;
 

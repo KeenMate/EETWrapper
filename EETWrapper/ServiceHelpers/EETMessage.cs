@@ -1,16 +1,12 @@
-﻿
-
-using System;
+﻿using System;
 using System.Globalization;
 using System.ServiceModel.Channels;
-using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
 using System.Xml;
-using EETTester.EETService_v3;
+using EETWrapper.EETService_v3;
 
-namespace EETTester
+namespace EETWrapper.ServiceHelpers
 {
-	public class EETMessage : Message
+	internal class EETMessage : Message
 	{
 		private readonly Message message;
 		private readonly object[] parameters;
@@ -24,34 +20,18 @@ namespace EETTester
 			this.message = message;
 			this.parameters = parameters;
 		}
-		public override MessageHeaders Headers
-		{
-			get { return this.message.Headers; }
-		}
-		public override MessageProperties Properties
-		{
-			get { return this.message.Properties; }
-		}
-		public override MessageVersion Version
-		{
-			get { return this.message.Version; }
-		}
+		public override MessageHeaders Headers => this.message.Headers;
+		public override MessageProperties Properties => this.message.Properties;
+		public override MessageVersion Version => this.message.Version;
 
-		protected override void OnWriteStartHeaders(XmlDictionaryWriter writer)
-		{
-			base.OnWriteStartHeaders(writer);
-		}
 
 		protected override void OnWriteStartBody(XmlDictionaryWriter writer)
 		{
-			//base.OnWriteStartBody(writer);
-			//s: Envelope[xmlns: s = http://www.w3.org/2003/05/soap-envelope xmlns:u=http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd ]
-
-			 writer.WriteStartElement("Body", "http://www.w3.org/2003/05/soap-envelope");
+			writer.WriteStartElement("Body", "http://www.w3.org/2003/05/soap-envelope");
 			writer.WriteXmlnsAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance");
 			writer.WriteXmlnsAttribute("xsd", "http://www.w3.org/2001/XMLSchema");
-			//writer.WriteAttributeString("Id", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd", bodyKey);
 		}
+		
 		protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
 		{
 			//< Trzba xmlns = "http://fs.mfcr.cz/eet/schema/v3" xmlns: xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns: xsd = "http://www.w3.org/2001/XMLSchema" >
@@ -131,134 +111,6 @@ namespace EETTester
 			}), "http://fs.mfcr.cz/eet/schema/v3");
 
 		}
-
-
-
-		protected override void OnWriteStartEnvelope(XmlDictionaryWriter writer)
-		{
-			base.OnWriteStartEnvelope(writer);
-		}
-
-		protected override void OnWriteMessage(XmlDictionaryWriter writer)
-		{
-			base.OnWriteMessage(writer);
-		}
-
-	}
-
-	public static class XmlHelper
-	{
-		public static void WriteElement(this XmlDictionaryWriter writer, string name, Action<XmlDictionaryWriter> insideElement, string ns = "")
-		{
-			if(string.IsNullOrEmpty(ns))
-				writer.WriteStartElement(name);
-			else
-			{
-				writer.WriteStartElement(name, ns);
-			}
-			insideElement(writer);
-			writer.WriteEndElement();
-		}
-
-		public static void WriteEETAttribute(this XmlDictionaryWriter writer, string key, object value, Func<bool> isSpecifiedFunc = null)
-		{
-			if (isSpecifiedFunc != null && !isSpecifiedFunc())
-			{
-				return;
-			}
-
-			string v = "";
-			switch (value.GetType().Name.ToLower())
-			{
-				case "string":
-					{
-						v = (string)value;
-						break;
-					}
-				case "boolean":
-				case "int32":
-					{
-						v = value.ToString().ToLower();
-						break;
-					}
-				case "datetime":
-					{
-						v = ((DateTime)value).ToString(EETMessage.EETDateFormat);
-						break;
-					}
-				case "decimal":
-					{
-						v = ((decimal)value).ToString("F2", EETMessage.EETDecimalFormat);
-						break;
-					}
-				case "pkpelementtype":
-				case "bkpelementtype":
-				{
-						v = ((PkpElementType)value).Text[0];
-						break;
-				}
-			}
-
-			writer.WriteAttributeString(key, v);
-		}
-	}
-
-
-	public class EETBodyWriter : BodyWriter
-	{
-		public EETBodyWriter(bool isBuffered) : base(isBuffered)
-		{
-		}
-
-		protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
-		{
-			throw new NotImplementedException();
-		}
-	}
-
-	public class EETMessageFormatter : IClientMessageFormatter
-	{
-		private readonly IClientMessageFormatter formatter;
-
-		public EETMessageFormatter(IClientMessageFormatter formatter)
-		{
-			this.formatter = formatter;
-		}
-
-		public Message SerializeRequest(MessageVersion messageVersion, object[] parameters)
-		{
-			var message = this.formatter.SerializeRequest(messageVersion, parameters);
-			return new EETMessage(message, parameters);
-		}
-
-		public object DeserializeReply(Message message, object[] parameters)
-		{
-			return this.formatter.DeserializeReply(message, parameters);
-		}
-	}
-
-	[AttributeUsage(AttributeTargets.Method)]
-	public class EETFormatMessageAttribute : Attribute, IOperationBehavior
-	{
-		public void AddBindingParameters(OperationDescription operationDescription,
-				BindingParameterCollection bindingParameters)
-		{ }
-
-		public void ApplyClientBehavior(OperationDescription operationDescription, ClientOperation clientOperation)
-		{
-			var serializerBehavior = operationDescription.Behaviors.Find<XmlSerializerOperationBehavior>();
-
-			if (clientOperation.Formatter == null)
-				((IOperationBehavior)serializerBehavior).ApplyClientBehavior(operationDescription, clientOperation);
-
-			IClientMessageFormatter innerClientFormatter = clientOperation.Formatter;
-
-			clientOperation.Formatter = new EETMessageFormatter(innerClientFormatter);
-		}
-
-		public void ApplyDispatchBehavior(OperationDescription operationDescription, DispatchOperation dispatchOperation)
-		{ }
-
-		public void Validate(OperationDescription operationDescription) { }
+		
 	}
 }

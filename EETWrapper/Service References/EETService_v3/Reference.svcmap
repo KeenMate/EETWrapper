@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1a371aa6-ec39-422b-992e-1954026be0d6" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6f095d76-6963-4feb-9e1b-421138c8e17c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,11 +19,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="file://C:\Projects\EETTester\Docs\EETServiceSOAP.wsdl" Protocol="file" SourceId="1" />
+    <MetadataSource Address="d:\Git\EETWrapper\Docs\EETServiceSOAP.wsdl" Protocol="file" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="EETXMLSchema.xsd" MetadataType="Schema" ID="6a6df8a9-1310-41e0-9e0b-a2803bbf30a3" SourceId="1" SourceUrl="file:///C:/Projects/EETTester/Docs/EETXMLSchema.xsd" />
-    <MetadataFile FileName="EET.wsdl" MetadataType="Wsdl" ID="d7cfa053-1da4-4cd6-b339-bbccaca848cb" SourceId="1" SourceUrl="file:///C:/Projects/EETTester/Docs/EETServiceSOAP.wsdl" />
+    <MetadataFile FileName="EETXMLSchema.xsd" MetadataType="Schema" ID="ecaa9de4-22f5-44c1-b5c6-11f7f382ac12" SourceId="1" SourceUrl="file:///d:/Git/EETWrapper/Docs/EETXMLSchema.xsd" />
+    <MetadataFile FileName="EET.wsdl" MetadataType="Wsdl" ID="3d9ee47d-e39e-452f-afd6-9a2761653df5" SourceId="1" SourceUrl="file:///d:/Git/EETWrapper/Docs/EETServiceSOAP.wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
