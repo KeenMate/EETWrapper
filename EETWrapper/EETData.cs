@@ -65,7 +65,7 @@ namespace EETWrapper
 		/// <summary>
 		/// Total amount for performance exempted from VAT, other performance
 		/// </summary>
-		public decimal TotalAmountOfSale { get; set; }
+		public decimal TotalAmountExemptedFromVAT { get; set; }
 	}
 
 }
