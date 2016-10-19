@@ -66,6 +66,16 @@ namespace EETWrapper
 		/// Total amount for performance exempted from VAT, other performance
 		/// </summary>
 		public decimal TotalAmountExemptedFromVAT { get; set; }
+
+		/// <summary>
+		/// Total tax base ‐ basic VAT rate
+		/// </summary>
+		public decimal TotalTaxBase_BasicVATRate { get; set; }
+
+		/// <summary>
+		/// Total VAT ‐ basic VAT rate
+		/// </summary>
+		public decimal TotalVAT_BasicVATRate { get; set; }
 	}
 
 }
