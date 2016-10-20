@@ -74,7 +74,7 @@ namespace EETTester
 			data.rezim = 0;
 
 			data.celk_trzba = 34113.00M;
-
+			Console.ForegroundColor = ConsoleColor.Black;
 			data.cerp_zuct = 679;
 			data.cerp_zuctSpecified = true;
 			data.cest_sluz = 5460;

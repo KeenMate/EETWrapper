@@ -8,8 +8,8 @@ namespace EETWrapper
 {
 	public class EETData
 	{
-		public enum SaleRegimes { Normal, Special}
-		
+		public enum SaleRegimes { Normal, Special }
+
 		public bool FirstTry { get; set; } = true;
 
 		/// <summary>
@@ -68,7 +68,7 @@ namespace EETWrapper
 		public decimal TotalAmountExemptedFromVAT { get; set; }
 
 		/// <summary>
-		/// Total tax base ‐ basic VAT rate
+		/// Total tax base ‐ basic VAT rate 
 		/// </summary>
 		public decimal TotalTaxBase_BasicVATRate { get; set; }
 
@@ -76,6 +76,56 @@ namespace EETWrapper
 		/// Total VAT ‐ basic VAT rate
 		/// </summary>
 		public decimal TotalVAT_BasicVATRate { get; set; }
+
+		/// <summary>
+		/// Total tax base ‐ first reduced VAT rate
+		/// </summary>
+		public decimal TotalTaxBase_FirstReducedVATRate { get; set; }
+
+		/// <summary>
+		/// Total VAT ‐ first reduced VAT rate 
+		/// </summary>
+		public decimal TotalVAT_FirstReducedVATRate { get; set; }
+
+		/// <summary>
+		/// Total tax base ‐ second reduced VAT rate
+		/// </summary>
+		public decimal TotalTaxBase_SecondReducedVATRate { get; set; }
+
+		/// <summary>
+		/// Total VAT ‐ second reduced VAT rate 
+		/// </summary>
+		public decimal TotalVAT_SecondReducedVATRate { get; set; }
+
+		/// <summary>
+		/// Total amount under the VAT scheme for travel service
+		/// </summary>
+		public decimal TotalAmountVATForTravelService { get; set; }
+
+		/// <summary>
+		/// Total amount under the VAT scheme for the sale of used goods ‐ basic VATrate
+		/// </summary>
+		public decimal TotalAmountVATForSaleUsedGoods_BasicVATRate { get; set; }
+
+		/// <summary>
+		/// Total amount under the VAT scheme for the sale of used goods ‐ first reduced VAT rate
+		/// </summary>
+		public decimal TotalAmountVATForSaleUsedGoods_FirstReducedVATRate { get; set; }
+
+		/// <summary>
+		/// Total amount under the VAT scheme for the sale of used goods ‐ second reduced VAT rate
+		/// </summary>
+		public decimal TotalAmountVATForSaleUsedGoods_SecondReducedVATRate { get; set; }
+
+		/// <summary>
+		/// Total amount of payments intended for subsequent drawing or settlement
+		/// </summary>
+		public decimal TotalAmountOfPaymentsForSubsequentDrawingOrSettlement { get; set; }
+
+		/// <summary>
+		/// Total amount of payments which are payments subsequently drawn or settled
+		/// </summary>
+		public decimal TotalAmountOfPaymentsSubsequentlyDrawOrSettled { get; set; }
 	}
 
 }
