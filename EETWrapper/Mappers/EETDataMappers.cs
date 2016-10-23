@@ -46,36 +46,78 @@ namespace EETWrapper.Mappers
 					body.zakl_nepodl_dphSpecified = true;
 				}
 
-				body.cerp_zuct = 679;
-				body.cerp_zuctSpecified = true;
-				body.cest_sluz = 5460;
-				body.cest_sluzSpecified = true;
-				body.dan1 = -172.39M;
-				body.dan1Specified = true;
-				body.dan2 = -530.73M;
-				body.dan2Specified = true;
-				body.dan3 = 975.65M;
-				body.dan3Specified = true;
-				body.dat_trzby = new DateTime(2016, 08, 05, 0, 30, 12, DateTimeKind.Local);
+				if (data.AdditionalData.TotalTaxBase_BasicVATRate.HasValue)
+				{
+					body.zakl_dan1 = data.AdditionalData.TotalTaxBase_BasicVATRate.Value;
+					body.zakl_dan1Specified = true;
+				}
 
-				body.pouzit_zboz1 = 784;
-				body.pouzit_zboz1Specified = true;
-				body.pouzit_zboz2 = 967;
-				body.pouzit_zboz2Specified = true;
-				body.pouzit_zboz3 = 189;
-				body.pouzit_zboz3Specified = true;
+				if (data.AdditionalData.TotalVAT_BasicVATRate.HasValue)
+				{
+					body.dan1 = data.AdditionalData.TotalVAT_BasicVATRate.Value;
+					body.dan1Specified = true;
+				}
 
+				if (data.AdditionalData.TotalTaxBase_FirstReducedVATRate.HasValue)
+				{
+					body.zakl_dan2 = data.AdditionalData.TotalTaxBase_FirstReducedVATRate.Value;
+					body.zakl_dan2Specified = true;
+				}
 
-				body.urceno_cerp_zuct = 324;
-				body.urceno_cerp_zuctSpecified = true;
-				body.zakl_dan1 = -820.92M;
-				body.zakl_dan1Specified = true;
-				body.zakl_dan2 = -3538.20M;
-				body.zakl_dan2Specified = true;
-				body.zakl_dan3 = -9756.46M;
-				body.zakl_dan3Specified = true;
-				body.zakl_nepodl_dph = 3036.00M;
-				body.zakl_nepodl_dphSpecified = true;
+				if (data.AdditionalData.TotalVAT_FirstReducedVATRate.HasValue)
+				{
+					body.dan2 = data.AdditionalData.TotalVAT_FirstReducedVATRate.Value;
+					body.dan2Specified = true;
+				}
+
+				if (data.AdditionalData.TotalTaxBase_SecondReducedVATRate.HasValue)
+				{
+					body.zakl_dan3 = data.AdditionalData.TotalTaxBase_SecondReducedVATRate.Value;
+					body.zakl_dan3Specified = true;
+				}
+
+				if (data.AdditionalData.TotalVAT_SecondReducedVATRate.HasValue)
+				{
+					body.dan3 = data.AdditionalData.TotalVAT_SecondReducedVATRate.Value;
+					body.dan3Specified = true;
+				}
+
+				if (data.AdditionalData.TotalAmountVATForTravelService.HasValue)
+				{
+					body.cest_sluz = data.AdditionalData.TotalAmountVATForTravelService.Value;
+					body.cest_sluzSpecified = true;
+				}
+
+				if (data.AdditionalData.TotalAmountVATForSaleUsedGoods_BasicVATRate.HasValue)
+				{
+					body.pouzit_zboz1 = data.AdditionalData.TotalAmountVATForSaleUsedGoods_BasicVATRate.Value;
+					body.pouzit_zboz1Specified = true;
+				}
+
+				if (data.AdditionalData.TotalAmountVATForSaleUsedGoods_FirstReducedVATRate.HasValue)
+				{
+					body.pouzit_zboz2 = data.AdditionalData.TotalAmountVATForSaleUsedGoods_FirstReducedVATRate.Value;
+					body.pouzit_zboz2Specified = true;
+				}
+
+				if (data.AdditionalData.TotalAmountVATForSaleUsedGoods_SecondReducedVATRate.HasValue)
+				{
+					body.pouzit_zboz3 = data.AdditionalData.TotalAmountVATForSaleUsedGoods_SecondReducedVATRate.Value;
+					body.pouzit_zboz3Specified = true;
+				}
+
+				if (data.AdditionalData.TotalAmountOfPaymentsForSubsequentDrawingOrSettlement.HasValue)
+				{
+					body.urceno_cerp_zuct = data.AdditionalData.TotalAmountOfPaymentsForSubsequentDrawingOrSettlement.Value;
+					body.urceno_cerp_zuctSpecified = true;
+				}
+
+				if (data.AdditionalData.TotalAmountOfPaymentsSubsequentlyDrawOrSettled.HasValue)
+				{
+					body.cerp_zuct = data.AdditionalData.TotalAmountOfPaymentsSubsequentlyDrawOrSettled.Value;
+					body.cerp_zuctSpecified = true;
+				}
+
 
 #warning Finish the mappings
 			}
