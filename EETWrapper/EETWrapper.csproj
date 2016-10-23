@@ -66,9 +66,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Exceptions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Exceptions.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\LogEventArgs.cs" />
     <Compile Include="EETProvider.cs" />
     <Compile Include="EETData.cs" />
-    <Compile Include="Marie.cs" />
+    <Compile Include="EETResponse.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
+    <Compile Include="Mappers\EETDataMappers.cs" />
     <Compile Include="ServiceHelpers\EETFormatMessageAttribute.cs" />
     <Compile Include="ServiceHelpers\EETMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -125,6 +138,16 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Exceptions.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Exceptions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Messages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -43,15 +43,15 @@ namespace EETTester
 
 			//client.ClientCredentials.ClientCertificate.SetCertificate(StoreLocation.CurrentUser, StoreName.My, X509FindType.FindBySubjectName, "CZ00000019");
 
-			var endpointBinding = client.Endpoint.Binding;
+			//var endpointBinding = client.Endpoint.Binding;
 
 			//EETService service = new EETService();
 			ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-			System.Net.ServicePointManager.ServerCertificateValidationCallback +=
-					(se, cert, chain, sslerror) =>
-					{
-						return true;
-					};
+			//System.Net.ServicePointManager.ServerCertificateValidationCallback +=
+			//		(se, cert, chain, sslerror) =>
+			//		{
+			//			return true;
+			//		};
 
 			//service.ClientCertificates.Add(orDefault);
 
@@ -150,40 +150,6 @@ namespace EETTester
 
 		}
 
-		static string SHA1Hash(byte[] input)
-		{
-			var hash = (new SHA1Managed()).ComputeHash(input);
-			return string.Join("", hash.Select(b => b.ToString("x2")).ToArray());
-		}
-
-		public static string ByteArrayToString(byte[] ba)
-		{
-			StringBuilder hex = new StringBuilder(ba.Length * 2);
-			foreach (byte b in ba)
-				hex.AppendFormat("{0:x2}", b);
-			return hex.ToString();
-		}
-
-		private static byte[] generatePKP(X509Certificate2 certificate, TrzbaDataType data)
-		{
-			//http://stackoverflow.com/questions/7444586/how-can-i-sign-a-file-using-rsa-and-sha256-with-net
-			string sign =
-					$"{data.dic_popl}|{data.id_provoz}|{data.id_pokl}|{data.porad_cis}|{data.dat_trzby.ToString("yyyy-MM-ddTHH:mm:sszzz").Replace("+03:00", "+02:00")}|{data.celk_trzba.ToString(EETMessage.EETDecimalFormat)}";
-
-
-			// Note that this will return a Basic crypto provider, with only SHA-1 support
-			var privKey = (RSACryptoServiceProvider)certificate.PrivateKey;
-			// Force use of the Enhanced RSA and AES Cryptographic Provider with openssl-generated SHA256 keys
-			var enhCsp = new RSACryptoServiceProvider().CspKeyContainerInfo;
-			var cspparams = new CspParameters(enhCsp.ProviderType, enhCsp.ProviderName, privKey.CspKeyContainerInfo.KeyContainerName);
-
-			using (RSACryptoServiceProvider key = new RSACryptoServiceProvider(cspparams))
-			{
-				//Sign the data
-				byte[] sig = key.SignData(UTF8Encoding.UTF8.GetBytes(sign), CryptoConfig.MapNameToOID("SHA256"));
-
-				return sig;
-			}
-		}
+		
 	}
 }
