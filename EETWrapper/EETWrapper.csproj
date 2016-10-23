@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="EETProvider.cs" />
     <Compile Include="EETData.cs" />
+    <Compile Include="Marie.cs" />
     <Compile Include="ServiceHelpers\EETFormatMessageAttribute.cs" />
     <Compile Include="ServiceHelpers\EETMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
