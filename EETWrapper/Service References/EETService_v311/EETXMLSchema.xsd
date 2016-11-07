@@ -18,8 +18,8 @@
     <xs:attribute name="dic_popl" type="tns:CZDICType" use="required" />
     <xs:attribute name="dic_poverujiciho" type="tns:CZDICType" use="optional" />
     <xs:attribute name="id_provoz" type="tns:IdProvozType" use="required" />
-    <xs:attribute name="id_pokl" type="tns:string" use="required" />
-    <xs:attribute name="porad_cis" type="tns:string" use="required" />
+    <xs:attribute name="id_pokl" type="tns:string20" use="required" />
+    <xs:attribute name="porad_cis" type="tns:string25" use="required" />
     <xs:attribute name="dat_trzby" type="tns:dateTime" use="required" />
     <xs:attribute name="celk_trzba" type="tns:CastkaType" use="required" />
     <xs:attribute name="zakl_nepodl_dph" type="tns:CastkaType" use="optional" />
@@ -88,9 +88,14 @@
   <xs:complexType name="OdpovedVarovaniType" mixed="true">
     <xs:attribute name="kod_varov" type="tns:KodVarovType" use="required" />
   </xs:complexType>
-  <xs:simpleType name="string">
+  <xs:simpleType name="string20">
     <xs:restriction base="xs:string">
       <xs:pattern value="[0-9a-zA-Z\.,:;/#\-_ ]{1,20}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="string25">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9a-zA-Z\.,:;/#\-_ ]{1,25}" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="dateTime">

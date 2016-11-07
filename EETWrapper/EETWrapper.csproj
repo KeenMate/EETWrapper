@@ -76,36 +76,40 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Data\Enums\WarningTypes.cs" />
     <Compile Include="Data\LogEventArgs.cs" />
+    <Compile Include="Data\Enums\ResultTypes.cs" />
     <Compile Include="EETProvider.cs" />
     <Compile Include="EETData.cs" />
     <Compile Include="EETResponse.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Mappers\EETDataMappers.cs" />
-    <Compile Include="ServiceHelpers\EETFormatMessageAttribute.cs" />
-    <Compile Include="ServiceHelpers\EETMessage.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\EETService_v3\Reference.cs">
+    <Compile Include="Service References\EETService_v311\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ServiceHelpers\EETFormatMessageAttribute.cs" />
+    <Compile Include="ServiceHelpers\EETMessage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceHelpers\EETMessageFormatter.cs" />
     <Compile Include="ServiceHelpers\XmlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="Service References\EETService_v3\EET.wsdl" />
-    <None Include="Service References\EETService_v3\EETWrapper.EETService_v3.OdeslaniTrzbyResponse.datasource">
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EETService_v311\EET.wsdl" />
+    <None Include="Service References\EETService_v311\EETWrapper.EETService_v311.OdeslaniTrzbyResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\EETService_v3\EETWrapper.EETService_v3.OdpovedHlavickaType.datasource">
+    <None Include="Service References\EETService_v311\EETWrapper.EETService_v311.OdpovedHlavickaType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\EETService_v3\EETWrapper.EETService_v3.OdpovedVarovaniType.datasource">
+    <None Include="Service References\EETService_v311\EETWrapper.EETService_v311.OdpovedVarovaniType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\EETService_v3\EETXMLSchema.xsd">
+    <None Include="Service References\EETService_v311\EETXMLSchema.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -125,21 +129,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\EETService_v3\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\EETService_v3\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\EETService_v3\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\EETService_v3\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Assets\Exceptions.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Exceptions.Designer.cs</LastGenOutput>
@@ -148,6 +137,21 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Messages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\EETService_v311\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EETService_v311\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EETService_v311\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EETService_v311\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

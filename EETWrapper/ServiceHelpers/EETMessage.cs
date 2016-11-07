@@ -2,7 +2,8 @@
 using System.Globalization;
 using System.ServiceModel.Channels;
 using System.Xml;
-using EETWrapper.EETService_v3;
+using EETWrapper.EETService_v311;
+
 
 namespace EETWrapper.ServiceHelpers
 {
@@ -67,7 +68,7 @@ namespace EETWrapper.ServiceHelpers
 					d.WriteEETAttribute("celk_trzba", data.celk_trzba);
 					d.WriteEETAttribute("dat_trzby", data.dat_trzby);
 					d.WriteEETAttribute("dic_popl", data.dic_popl);
-					d.WriteEETAttribute("dic_poverujiciho", data.dic_poverujiciho);
+					d.WriteEETAttribute("dic_poverujiciho", data.dic_poverujiciho, ()=> !string.IsNullOrEmpty(data.dic_poverujiciho));
 					d.WriteEETAttribute("id_pokl", data.id_pokl);
 					d.WriteEETAttribute("porad_cis", data.porad_cis);
 					d.WriteEETAttribute("rezim", data.rezim);

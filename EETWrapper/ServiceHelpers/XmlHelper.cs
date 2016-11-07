@@ -1,6 +1,7 @@
 using System;
 using System.Xml;
-using EETWrapper.EETService_v3;
+using EETWrapper.EETService_v311;
+
 
 namespace EETWrapper.ServiceHelpers
 {

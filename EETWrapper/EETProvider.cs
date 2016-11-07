@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
@@ -7,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EETWrapper.Assets;
 using EETWrapper.Data;
-using EETWrapper.EETService_v3;
+using EETWrapper.EETService_v311;
 using EETWrapper.Interfaces;
 using EETWrapper.Mappers;
 
@@ -16,7 +17,7 @@ namespace EETWrapper
 	public class EETProvider
 	{
 		private X509Certificate2 taxpayersCertificate;
-		private readonly bool withLogging;
+		private readonly string customEndPointName;
 
 		public event EventHandler<LogEventArgs> OnLogChange;
 
@@ -28,8 +29,14 @@ namespace EETWrapper
 		public EETProvider(string certName)
 		{
 			taxpayersCertificate = fetchCertificate(certName);
-
 		}
+
+		public EETProvider(X509Certificate2 taxpayersCertificate, string customEndPointName)
+		{
+			this.taxpayersCertificate = taxpayersCertificate;
+			this.customEndPointName = customEndPointName;
+		}
+
 
 		/// <summary>
 		/// X509 taxpayer's certificate
@@ -77,7 +84,10 @@ namespace EETWrapper
 
 		private EETClient prepareClient()
 		{
-			EETClient client = new EETClient();
+			logTrace("Creating EETClient object " + (string.IsNullOrEmpty(customEndPointName) ? "with default": $"with custom endpoint name: {customEndPointName}" ));
+			EETClient client = string.IsNullOrEmpty(customEndPointName)? new EETClient(): new EETClient(customEndPointName);
+
+			
 
 			return client;
 		}
@@ -96,10 +106,10 @@ namespace EETWrapper
 				OnLogChange.Invoke(this, new LogEventArgs(message, LogEventArgs.LogLevels.Warn));
 		}
 
-		private void logError(string message)
+		private void logError(string message, Exception ex)
 		{
 			if (OnLogChange != null)
-				OnLogChange.Invoke(this, new LogEventArgs(message, LogEventArgs.LogLevels.Error));
+				OnLogChange.Invoke(this, new LogEventArgs(message, LogEventArgs.LogLevels.Error, ex));
 		}
 
 		private void logTrace(string message)
@@ -114,22 +124,57 @@ namespace EETWrapper
 
 		public EETResponse SendData(EETData data)
 		{
-			var client = prepareClient();
+			logInfo(Messages.SendingEETData);
+			EETResponse eetResponse;
+			try
+			{
+				logTrace("Preparing WCF client");
+				var client = prepareClient();
 
-			object response;
-			OdpovedVarovaniType[] warnings;
+				object response;
+				OdpovedVarovaniType[] warnings;
 
-			client.OdeslaniTrzby(data.GetRequestHeader(), data.GetRequestBody(), data.GetRequestCheckCodes(taxpayersCertificate), out response, out warnings);
+				OdpovedHlavickaType odpovedHlavickaType = client.OdeslaniTrzby(data.GetRequestHeader(), data.GetRequestBody(), data.GetRequestCheckCodes(taxpayersCertificate), out response, out warnings);
 
-			return new EETResponse();
+				if(response is OdpovedChybaType)
+				{
+					OdpovedChybaType o = (OdpovedChybaType) response;
+					
+					eetResponse = new EETResponse(ResultTypes.SuccessWithWarnings, new List<EETWarning>() {new EETWarning(o.kod, o.Text[0])});
+				}
+				else
+				{
+					eetResponse = new EETResponse(ResultTypes.Success, new Guid(odpovedHlavickaType.uuid_zpravy));
+				}
+
+				
+
+				return eetResponse;
+			}
+			catch (Exception ex)
+			{
+				logError("Could not call the service.", ex);
+				eetResponse = new EETResponse(ResultTypes.ClientFailure, "An error has occured while calling the server. Please, check the log for more information.");
+				return eetResponse;
+			}
 		}
 
 		public async Task<EETResponse> SendDataAsync(EETData data)
 		{
-			var client = prepareClient();
-			var response = await client.OdeslaniTrzbyAsync(data.GetRequestData(taxpayersCertificate));
+			EETResponse eetResponse;
+			try
+			{
+				var client = prepareClient();
+				var response = await client.OdeslaniTrzbyAsync(data.GetRequestData(taxpayersCertificate));
 			
-			return new EETResponse();
+				return new EETResponse(ResultTypes.Success, response.Hlavicka.uuid_zpravy);
+			}
+			catch (Exception ex)
+			{
+				logError("Could not call the service.", ex);
+				eetResponse = new EETResponse(ResultTypes.ClientFailure, "An error has occured while calling the server. Please, check the log for more information.");
+				return eetResponse;
+			}
 		}
 	}
 }

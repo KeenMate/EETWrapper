@@ -59,8 +59,32 @@ namespace EETWrapper.Assets {
                 resourceCulture = value;
             }
         }
-
-	    public static string OpeningPersonalCurrentUserCertStore { get; set; }
-	    public static string SearchingForCertByName { get; set; }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opening personal certificate store of current user.
+        /// </summary>
+        internal static string OpeningPersonalCurrentUserCertStore {
+            get {
+                return ResourceManager.GetString("OpeningPersonalCurrentUserCertStore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Searching for certificate by name .
+        /// </summary>
+        internal static string SearchingForCertByName {
+            get {
+                return ResourceManager.GetString("SearchingForCertByName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sending EET data.
+        /// </summary>
+        internal static string SendingEETData {
+            get {
+                return ResourceManager.GetString("SendingEETData", resourceCulture);
+            }
+        }
     }
 }

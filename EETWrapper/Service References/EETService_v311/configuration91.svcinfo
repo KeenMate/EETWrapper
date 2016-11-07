@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="xAVJi8jJCTBzZROcsUNKgQV6qHY=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="8xBLrS0uvwL0rYqfRhH0O87pG7o=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="EETSOAP">
       <properties>
@@ -221,7 +221,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="EETServiceSOAP" contract="EETService_v3.EET" bindingType="basicHttpBinding" address="https://pg.eet.cz/eet/services/EETServiceSOAP/v3" bindingConfiguration="EETSOAP">
+    <endpoint name="EETServiceSOAP" contract="EETService_v311.EET" bindingType="basicHttpBinding" address="https://pg.eet.cz/eet/services/EETServiceSOAP/v3" bindingConfiguration="EETSOAP">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>https://pg.eet.cz:443/eet/services/EETServiceSOAP/v3</serializedValue>
@@ -236,7 +236,7 @@
           <serializedValue>EETSOAP</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>EETService_v3.EET</serializedValue>
+          <serializedValue>EETService_v311.EET</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>

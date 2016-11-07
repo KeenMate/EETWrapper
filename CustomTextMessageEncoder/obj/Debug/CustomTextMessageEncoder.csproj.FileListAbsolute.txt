@@ -1,0 +1,5 @@
+D:\temp\WF_WCF_Samples\WCF\Extensibility\MessageEncoder\Text\CS\library\bin\CustomTextMessageEncoder.dll
+D:\temp\WF_WCF_Samples\WCF\Extensibility\MessageEncoder\Text\CS\library\bin\CustomTextMessageEncoder.pdb
+D:\temp\WF_WCF_Samples\WCF\Extensibility\MessageEncoder\Text\CS\library\obj\Debug\CustomTextMessageEncoder.csprojResolveAssemblyReference.cache
+D:\temp\WF_WCF_Samples\WCF\Extensibility\MessageEncoder\Text\CS\library\obj\Debug\CustomTextMessageEncoder.dll
+D:\temp\WF_WCF_Samples\WCF\Extensibility\MessageEncoder\Text\CS\library\obj\Debug\CustomTextMessageEncoder.pdb

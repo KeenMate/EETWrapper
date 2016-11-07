@@ -3,7 +3,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using EETWrapper.EETService_v3;
+using EETWrapper.EETService_v311;
 using EETWrapper.ServiceHelpers;
 
 namespace EETWrapper.Mappers
@@ -32,7 +32,7 @@ namespace EETWrapper.Mappers
 			body.porad_cis = data.ReceiptID;
 
 			body.dat_trzby = data.CreationDate;
-			body.rezim = (int)data.SaleRegime;
+			body.rezim = (int) data.SaleRegime;
 
 			body.celk_trzba = data.TotalAmountOfSale;
 
@@ -117,12 +117,9 @@ namespace EETWrapper.Mappers
 					body.cerp_zuct = data.AdditionalData.TotalAmountOfPaymentsSubsequentlyDrawOrSettled.Value;
 					body.cerp_zuctSpecified = true;
 				}
-
-
-#warning Finish the mappings
 			}
 
-			
+
 
 			return body;
 		}
@@ -135,23 +132,35 @@ namespace EETWrapper.Mappers
 
 			var pkp = generatePKP(taxpayersCertificate, data);
 
-			checkCodes.pkp.Text = new[] { Convert.ToBase64String(pkp, Base64FormattingOptions.None) };
+			checkCodes.pkp.Text = new[] {Convert.ToBase64String(pkp, Base64FormattingOptions.None)};
 
 			var bkp = SHA1Hash(pkp);
-			bkp = $"{bkp.Substring(0, 8)}-{bkp.Substring(8, 8)}-{bkp.Substring(16, 8)}-{bkp.Substring(24, 8)}-{bkp.Substring(32, 8)}";
+			bkp =
+				$"{bkp.Substring(0, 8)}-{bkp.Substring(8, 8)}-{bkp.Substring(16, 8)}-{bkp.Substring(24, 8)}-{bkp.Substring(32, 8)}";
 			checkCodes.bkp = new BkpElementType();
-			checkCodes.bkp.Text = new[] { bkp };
+			checkCodes.bkp.Text = new[] {bkp};
 
 			return checkCodes;
 		}
 
 		public static OdeslaniTrzbyRequest GetRequestData(this EETData data, X509Certificate2 taxpayersCertificate)
 		{
-			return new OdeslaniTrzbyRequest(data.GetRequestHeader(), data.GetRequestBody(), data.GetRequestCheckCodes(taxpayersCertificate));
+			return new OdeslaniTrzbyRequest(data.GetRequestHeader(), data.GetRequestBody(),
+				data.GetRequestCheckCodes(taxpayersCertificate));
+		}
+
+		public static EETResponse GetResponse(OdpovedHlavickaType response)
+		{
+			return new EETResponse();
+		}
+
+		public static EETResponse GetResponseFromAsync(OdeslaniTrzbyResponse response)
+		{
+			return new EETResponse();
 		}
 
 
-		static string SHA1Hash(byte[] input)
+	static string SHA1Hash(byte[] input)
 		{
 			var hash = (new SHA1Managed()).ComputeHash(input);
 			return string.Join("", hash.Select(b => b.ToString("x2")).ToArray());

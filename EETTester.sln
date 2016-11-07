@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EETTester", "EETTester\EETT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EETWrapper", "EETWrapper\EETWrapper.csproj", "{22E3B5D0-4BC1-47BB-BBE1-E51801F5FF45}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomTextMessageEncoder", "CustomTextMessageEncoder\CustomTextMessageEncoder.csproj", "{8A42F86C-6977-4A0B-9889-3C697A0C1096}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{22E3B5D0-4BC1-47BB-BBE1-E51801F5FF45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22E3B5D0-4BC1-47BB-BBE1-E51801F5FF45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22E3B5D0-4BC1-47BB-BBE1-E51801F5FF45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A42F86C-6977-4A0B-9889-3C697A0C1096}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A42F86C-6977-4A0B-9889-3C697A0C1096}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A42F86C-6977-4A0B-9889-3C697A0C1096}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A42F86C-6977-4A0B-9889-3C697A0C1096}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

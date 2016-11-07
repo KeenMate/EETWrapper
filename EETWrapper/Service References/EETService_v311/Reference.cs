@@ -10,24 +10,23 @@
 
 using EETWrapper.ServiceHelpers;
 
-namespace EETWrapper.EETService_v3
+namespace EETWrapper.EETService_v311
 {
 
 
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-	[System.ServiceModel.ServiceContractAttribute(Namespace = "http://fs.mfcr.cz/eet/schema/v3", ConfigurationName = "EETService_v3.EET")]
+	[System.ServiceModel.ServiceContractAttribute(Namespace = "http://fs.mfcr.cz/eet/schema/v3", ConfigurationName = "EETService_v311.EET")]
 	public interface EET
 	{
 
 		[System.ServiceModel.OperationContractAttribute(Action = "http://fs.mfcr.cz/eet/OdeslaniTrzby", ReplyAction = "*")]
 		[System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
 		[EETFormatMessage]
-		EETWrapper.EETService_v3.OdeslaniTrzbyResponse OdeslaniTrzby(EETWrapper.EETService_v3.OdeslaniTrzbyRequest request);
+		EETWrapper.EETService_v311.OdeslaniTrzbyResponse OdeslaniTrzby(EETWrapper.EETService_v311.OdeslaniTrzbyRequest request);
 
 		// CODEGEN: Generating message contract since the operation has multiple return values.
 		[System.ServiceModel.OperationContractAttribute(Action = "http://fs.mfcr.cz/eet/OdeslaniTrzby", ReplyAction = "*")]
-		[EETFormatMessage]
-		System.Threading.Tasks.Task<EETWrapper.EETService_v3.OdeslaniTrzbyResponse> OdeslaniTrzbyAsync(EETWrapper.EETService_v3.OdeslaniTrzbyRequest request);
+		System.Threading.Tasks.Task<EETWrapper.EETService_v311.OdeslaniTrzbyResponse> OdeslaniTrzbyAsync(EETWrapper.EETService_v311.OdeslaniTrzbyRequest request);
 	}
 
 	/// <remarks/>
@@ -1352,19 +1351,19 @@ namespace EETWrapper.EETService_v3
 	{
 
 		[System.ServiceModel.MessageBodyMemberAttribute(Namespace = "http://fs.mfcr.cz/eet/schema/v3", Order = 0)]
-		public EETWrapper.EETService_v3.TrzbaHlavickaType Hlavicka;
+		public EETWrapper.EETService_v311.TrzbaHlavickaType Hlavicka;
 
 		[System.ServiceModel.MessageBodyMemberAttribute(Namespace = "http://fs.mfcr.cz/eet/schema/v3", Order = 1)]
-		public EETWrapper.EETService_v3.TrzbaDataType Data;
+		public EETWrapper.EETService_v311.TrzbaDataType Data;
 
 		[System.ServiceModel.MessageBodyMemberAttribute(Namespace = "http://fs.mfcr.cz/eet/schema/v3", Order = 2)]
-		public EETWrapper.EETService_v3.TrzbaKontrolniKodyType KontrolniKody;
+		public EETWrapper.EETService_v311.TrzbaKontrolniKodyType KontrolniKody;
 
 		public OdeslaniTrzbyRequest()
 		{
 		}
 
-		public OdeslaniTrzbyRequest(EETWrapper.EETService_v3.TrzbaHlavickaType Hlavicka, EETWrapper.EETService_v3.TrzbaDataType Data, EETWrapper.EETService_v3.TrzbaKontrolniKodyType KontrolniKody)
+		public OdeslaniTrzbyRequest(EETWrapper.EETService_v311.TrzbaHlavickaType Hlavicka, EETWrapper.EETService_v311.TrzbaDataType Data, EETWrapper.EETService_v311.TrzbaKontrolniKodyType KontrolniKody)
 		{
 			this.Hlavicka = Hlavicka;
 			this.Data = Data;
@@ -1379,7 +1378,7 @@ namespace EETWrapper.EETService_v3
 	{
 
 		[System.ServiceModel.MessageBodyMemberAttribute(Namespace = "http://fs.mfcr.cz/eet/schema/v3", Order = 0)]
-		public EETWrapper.EETService_v3.OdpovedHlavickaType Hlavicka;
+		public EETWrapper.EETService_v311.OdpovedHlavickaType Hlavicka;
 
 		[System.ServiceModel.MessageBodyMemberAttribute(Namespace = "http://fs.mfcr.cz/eet/schema/v3", Order = 1)]
 		[System.Xml.Serialization.XmlElementAttribute("Chyba", typeof(OdpovedChybaType))]
@@ -1388,13 +1387,13 @@ namespace EETWrapper.EETService_v3
 
 		[System.ServiceModel.MessageBodyMemberAttribute(Namespace = "http://fs.mfcr.cz/eet/schema/v3", Order = 2)]
 		[System.Xml.Serialization.XmlElementAttribute("Varovani")]
-		public EETWrapper.EETService_v3.OdpovedVarovaniType[] Varovani;
+		public EETWrapper.EETService_v311.OdpovedVarovaniType[] Varovani;
 
 		public OdeslaniTrzbyResponse()
 		{
 		}
 
-		public OdeslaniTrzbyResponse(EETWrapper.EETService_v3.OdpovedHlavickaType Hlavicka, object Item, EETWrapper.EETService_v3.OdpovedVarovaniType[] Varovani)
+		public OdeslaniTrzbyResponse(EETWrapper.EETService_v311.OdpovedHlavickaType Hlavicka, object Item, EETWrapper.EETService_v311.OdpovedVarovaniType[] Varovani)
 		{
 			this.Hlavicka = Hlavicka;
 			this.Item = Item;
@@ -1403,13 +1402,13 @@ namespace EETWrapper.EETService_v3
 	}
 
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-	public interface EETChannel : EETWrapper.EETService_v3.EET, System.ServiceModel.IClientChannel
+	public interface EETChannel : EETWrapper.EETService_v311.EET, System.ServiceModel.IClientChannel
 	{
 	}
 
 	[System.Diagnostics.DebuggerStepThroughAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-	public partial class EETClient : System.ServiceModel.ClientBase<EETWrapper.EETService_v3.EET>, EETWrapper.EETService_v3.EET
+	public partial class EETClient : System.ServiceModel.ClientBase<EETWrapper.EETService_v311.EET>, EETWrapper.EETService_v311.EET
 	{
 
 		public EETClient()
@@ -1437,24 +1436,24 @@ namespace EETWrapper.EETService_v3
 		}
 
 		[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-		EETWrapper.EETService_v3.OdeslaniTrzbyResponse EETWrapper.EETService_v3.EET.OdeslaniTrzby(EETWrapper.EETService_v3.OdeslaniTrzbyRequest request)
+		EETWrapper.EETService_v311.OdeslaniTrzbyResponse EETWrapper.EETService_v311.EET.OdeslaniTrzby(EETWrapper.EETService_v311.OdeslaniTrzbyRequest request)
 		{
 			return base.Channel.OdeslaniTrzby(request);
 		}
 
-		public EETWrapper.EETService_v3.OdpovedHlavickaType OdeslaniTrzby(EETWrapper.EETService_v3.TrzbaHlavickaType Hlavicka, EETWrapper.EETService_v3.TrzbaDataType Data, EETWrapper.EETService_v3.TrzbaKontrolniKodyType KontrolniKody, out object Item, out EETWrapper.EETService_v3.OdpovedVarovaniType[] Varovani)
+		public EETWrapper.EETService_v311.OdpovedHlavickaType OdeslaniTrzby(EETWrapper.EETService_v311.TrzbaHlavickaType Hlavicka, EETWrapper.EETService_v311.TrzbaDataType Data, EETWrapper.EETService_v311.TrzbaKontrolniKodyType KontrolniKody, out object Item, out EETWrapper.EETService_v311.OdpovedVarovaniType[] Varovani)
 		{
-			EETWrapper.EETService_v3.OdeslaniTrzbyRequest inValue = new EETWrapper.EETService_v3.OdeslaniTrzbyRequest();
+			EETWrapper.EETService_v311.OdeslaniTrzbyRequest inValue = new EETWrapper.EETService_v311.OdeslaniTrzbyRequest();
 			inValue.Hlavicka = Hlavicka;
 			inValue.Data = Data;
 			inValue.KontrolniKody = KontrolniKody;
-			EETWrapper.EETService_v3.OdeslaniTrzbyResponse retVal = ((EETWrapper.EETService_v3.EET)(this)).OdeslaniTrzby(inValue);
+			EETWrapper.EETService_v311.OdeslaniTrzbyResponse retVal = ((EETWrapper.EETService_v311.EET)(this)).OdeslaniTrzby(inValue);
 			Item = retVal.Item;
 			Varovani = retVal.Varovani;
 			return retVal.Hlavicka;
 		}
 
-		public System.Threading.Tasks.Task<EETWrapper.EETService_v3.OdeslaniTrzbyResponse> OdeslaniTrzbyAsync(EETWrapper.EETService_v3.OdeslaniTrzbyRequest request)
+		public System.Threading.Tasks.Task<EETWrapper.EETService_v311.OdeslaniTrzbyResponse> OdeslaniTrzbyAsync(EETWrapper.EETService_v311.OdeslaniTrzbyRequest request)
 		{
 			return base.Channel.OdeslaniTrzbyAsync(request);
 		}
