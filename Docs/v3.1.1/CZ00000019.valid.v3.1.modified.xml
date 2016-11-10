@@ -1,8 +1,21 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
 	<SOAP-ENV:Header xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+		<ActivityId CorrelationId="e30a08c9-a158-4569-9aa3-1666ce0e14e4" xmlns="http://schemas.microsoft.com/2004/09/ServiceModel/Diagnostics">
+			baf4f094-534c-4324-8545-965c6fc74188
+		</ActivityId>
+		<VsDebuggerCausalityData xmlns="http://schemas.microsoft.com/vstudio/diagnostics/servicemodelsink">
+			uIDPo4G3I/cCOkVCqarXywNQTK0AAAAA92vC0l0Sb0yjqXkBTW+xxmjTs3RsPoxHkQIJJ2RwhgUACQAA
+		</VsDebuggerCausalityData>
 		<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" soap:mustUnderstand="1">
+			<wsu:Timestamp wsu:Id="_0">
+				<wsu:Created>
+					2016-11-07T08:08:38.039Z
+				</wsu:Created>
+				<wsu:Expires>
+					2016-11-07T08:13:38.039Z
+				</wsu:Expires>
+			</wsu:Timestamp>
 			<wsse:BinarySecurityToken EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary" ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3" wsu:Id="X509-A79845F15C5549CA0514761283545351">
 				MIIEmDCCA4CgAwIBAgIEdHOXJzANBgkqhkiG9w0BAQsFADB3MRIwEAYKCZImiZPyLGQBGRYCQ1oxQzBBBgNVBAoMOsSMZXNrw6EgUmVwdWJsaWthIOKAkyBHZW5lcsOhbG7DrSBmaW5hbsSNbsOtIMWZZWRpdGVsc3R2w60xHDAaBgNVBAMTE0VFVCBDQSAxIFBsYXlncm91bmQwHhcNMTYwOTMwMDkwMzU5WhcNMTkwOTMwMDkwMzU5WjBDMRIwEAYKCZImiZPyLGQBGRYCQ1oxEzARBgNVBAMTCkNaMDAwMDAwMTkxGDAWBgNVBA0TD3ByYXZuaWNrYSBvc29iYTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJnNUPW8rAlLi2KAwu12W1vqLj02mWIifq/Jp0/tUjf9B8RpkDAD3GOqDdVuHSfxej92WiEouDy7X8uXzIDdZu4pXA3t3KntxM8rAlu2U6SqtF3kTR+AJCdwfkM53U3z4/qoyKqdQ8lGuMxJKs7X5uIjcY/UDSXMK9OTmXRhndjYcX1oILr5F2ONf1Z0kWyl/S9wI0cl0gQ1F91mzqgnlH80u2inMmmBp42ndR4TGS1nvjer5D73bkLg07TdeqnUg609WwjUJN96OKZMsKXzBMzt09NbhQcABWnAWbRTSVhsAdDO8vfmWx2C+gXUlkIvtO+9fbj81GS1xdNoAkpARUcCAwEAAaOCAV4wggFaMAkGA1UdEwQCMAAwHQYDVR0OBBYEFL/0b0Iw6FY33UT8iJEy1V7nZVR6MB8GA1UdIwQYMBaAFHwwdqzM1ofR7Mkf4nAILONf3gwHMA4GA1UdDwEB/wQEAwIGwDBjBgNVHSAEXDBaMFgGCmCGSAFlAwIBMAEwSjBIBggrBgEFBQcCAjA8DDpUZW50byBjZXJ0aWZpa8OhdCBieWwgdnlkw6FuIHBvdXplIHBybyB0ZXN0b3ZhY8OtIMO6xI1lbHkuMIGXBgNVHR8EgY8wgYwwgYmggYaggYOGKWh0dHA6Ly9jcmwuY2ExLXBnLmVldC5jei9lZXRjYTFwZy9hbGwuY3JshipodHRwOi8vY3JsMi5jYTEtcGcuZWV0LmN6L2VldGNhMXBnL2FsbC5jcmyGKmh0dHA6Ly9jcmwzLmNhMS1wZy5lZXQuY3ovZWV0Y2ExcGcvYWxsLmNybDANBgkqhkiG9w0BAQsFAAOCAQEAvXdWsU+Ibd1VysKnjoy6RCYVcI9+oRUSSTvQQDJLFjwn5Sm6Hebhci8ERGwAzd2R6uqPdzl1KCjmHOitypZ66e+/e9wj3BaDqgBKRZYvxZykaVUdtQgG0819JZmiXTbGgOCKiUPIXO80cnP7U1ZPkVNV7WZwh0I2k/fg1VLTI5HA/x4BeD77wiEOExa7eqePJET0jpTVK3LxSW59LLIJROh4/kfKQbTvDL5Ypw8WagAMVCPvWnGJIcUru+ApLU4pZD9bdHSa1Ib4LpFhtWrkHYM/XqKbj2bNKKjTo5T3sU0Bf2QD3QzkmcjlNVG0V+qAgimwTdPueU/mtExw+7z1/A==
 			</wsse:BinarySecurityToken>
@@ -38,29 +51,7 @@
 	<soap:Body xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="id-A79845F15C5549CA0514761283545594">
 		<Trzba xmlns="http://fs.mfcr.cz/eet/schema/v3">
 			<Hlavicka dat_odesl="2016-08-19T19:06:37+02:00" prvni_zaslani="false" uuid_zpravy="2da635a5-d712-459d-9674-c12f335c39f7"/>
-			<Data 
-			celk_trzba="34113.00" 
-			cerp_zuct="679.00" 
-			cest_sluz="5460.00" 
-			dan1="-172.39" 
-			dan2="-530.73" 
-			dan3="975.65" 
-			dat_trzby="2016-08-05T00:30:12+02:00" 
-			dic_popl="CZ00000019" 
-			dic_poverujiciho="CZ683555118" 
-			id_pokl="/5546/RO24" 
-			id_provoz="273" 
-			porad_cis="0/6460/ZQ42" 
-			pouzit_zboz1="784.00" 
-			pouzit_zboz2="967.00" 
-			pouzit_zboz3="189.00" 
-			rezim="0" 
-			urceno_cerp_zuct="324.00" 
-			zakl_dan1="-820.92" 
-			zakl_dan2="-3538.20" 
-			zakl_dan3="9756.46" 
-			zakl_nepodl_dph="3036.00"
-			/>
+			<Data celk_trzba="34113.00" cerp_zuct="679.00" cest_sluz="5460.00" dan1="-172.39" dan2="-530.73" dan3="975.65" dat_trzby="2016-08-05T00:30:12+02:00" dic_popl="CZ00000019" dic_poverujiciho="CZ683555118" id_pokl="/5546/RO24" id_provoz="273" porad_cis="0/6460/ZQ42" pouzit_zboz1="784.00" pouzit_zboz2="967.00" pouzit_zboz3="189.00" rezim="0" urceno_cerp_zuct="324.00" zakl_dan1="-820.92" zakl_dan2="-3538.20" zakl_dan3="9756.46" zakl_nepodl_dph="3036.00"/>
 			<KontrolniKody>
 				<pkp cipher="RSA2048" digest="SHA256" encoding="base64">
 					a0asEiJhFCBlVtptSspKvEZhcrvnzF7SQ55C4DhnStnSu1b37GUI2+Dlme9P94UCPZ1oCUPJdsYOBZ3IX6aEgEe0FJKXYX0kXraYCJKIo3g64wRchE7iblIOBCK1uHh8qqHA66Isnhb6hqBOOdlt2aWO/0jCzlfeQr0axpPF1mohMnP3h3ICaxZh0dnMdju5OmMrq+91PL5T9KkR7bfGHqAoWJ0kmxY/mZumtRfGil2/xf7I5pdVeYXPgDO/Tojzm6J95n68fPDOXTDrTzKYmqDjpg3kmWepLNQKFXRmkQrkBLToJWG1LDUDm3UTTmPWzq4c0XnGcXJDZglxfolGpA==

@@ -71,6 +71,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CustomTextMessageEncoder\CustomTextMessageEncoder.csproj">
+      <Project>{8a42f86c-6977-4a0b-9889-3c697a0c1096}</Project>
+      <Name>CustomTextMessageEncoder</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EETWrapper\EETWrapper.csproj">
       <Project>{22e3b5d0-4bc1-47bb-bbe1-e51801f5ff45}</Project>
       <Name>EETWrapper</Name>

@@ -33,7 +33,28 @@
 	<Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.w3.org/2003/05/soap-envelope">
 		<Trzba xmlns="http://fs.mfcr.cz/eet/schema/v3">
 			<Hlavicka uuid_zpravy="d5d496d1-72bc-4d4c-a6fa-02d48b027553" dat_odesl="2016-11-07T09:07:52+01:00" prvni_zaslani="true" />
-			<Data id_provoz="273" celk_trzba="34113.00" dat_trzby="2016-11-07T09:07:52+01:00" dic_popl="CZ00000019" dic_poverujiciho="CZ683555118" id_pokl="/5546/RO24" porad_cis="0/6460/ZQ42" rezim="0" urceno_cerp_zuct="324.00" cerp_zuct="679.00" cest_sluz="5460.00" dan1="-172.39" dan2="-530.73" dan3="975.65" pouzit_zboz1="784.00" pouzit_zboz2="967.00" pouzit_zboz3="189.00" zakl_dan1="-820.92" zakl_dan2="-3538.20" zakl_dan3="-9756.46" zakl_nepodl_dph="3036.00" />
+			<Data 
+			celk_trzba="34113.00"
+			cerp_zuct="679.00"
+			cest_sluz="5460.00"
+			dan1="-172.39" 
+			dan2="-530.73" 
+			dan3="975.65" 
+			dat_trzby="2016-11-07T09:07:52+01:00" 
+			dic_popl="CZ00000019" 
+			dic_poverujiciho="CZ683555118" 
+			id_pokl="/5546/RO24"
+			id_provoz="273" 
+			porad_cis="0/6460/ZQ42" 
+			pouzit_zboz1="784.00" 
+			pouzit_zboz2="967.00" 
+			pouzit_zboz3="189.00" 
+			rezim="0" 
+			urceno_cerp_zuct="324.00" 
+			zakl_dan1="-820.92" 
+			zakl_dan2="-3538.20" 
+			zakl_dan3="-9756.46" 
+			zakl_nepodl_dph="3036.00" />
 			<KontrolniKody>
 				<pkp cipher="RSA2048" digest="SHA256" encoding="base64">IrQfRGjzfYhAGwX2cbWL+0/MgY3zDtLIe76j8TvXjV7V/712ousWUyjZWMJ39T7YyLizLdNd/xM5lMh3zlvL1Ei0pz9mU/EN0o+MnRURdnoZAxAyzxRPkopyHxeZEUyv/o78VGbDD/cfw/Z7xivkhk+cAGJ8pdfJgX5LeJ6DPlsCQF5c1HiPgOF+X7Gz2v07oi5hoR4RK6qmaQFA35hkYg+XbYm5iD/EuurSYEv8MEpz4TzXNV5DCnv1DxmLMxu6mqdIMR0s/MSHrBmOfnux/LIV6JXs6bvIS/aMUj52mKspedc/de1YJyC8t0cv1BxthMd7FMyoeUmtN4NIoX9dYA==</pkp>
 				<bkp digest="SHA1" encoding="base16">dee7d46e-ba9dda43-02c288df-9970a202-1e4b6629</bkp>
