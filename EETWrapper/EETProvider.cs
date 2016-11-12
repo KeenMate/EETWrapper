@@ -86,9 +86,7 @@ namespace EETWrapper
 		{
 			logTrace("Creating EETClient object " + (string.IsNullOrEmpty(customEndPointName) ? "with default": $"with custom endpoint name: {customEndPointName}" ));
 			EETClient client = string.IsNullOrEmpty(customEndPointName)? new EETClient(): new EETClient(customEndPointName);
-
 			
-
 			return client;
 		}
 

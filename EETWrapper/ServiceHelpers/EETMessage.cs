@@ -25,10 +25,21 @@ namespace EETWrapper.ServiceHelpers
 		public override MessageProperties Properties => this.message.Properties;
 		public override MessageVersion Version => this.message.Version;
 
+		protected override void OnWriteStartEnvelope(XmlDictionaryWriter writer)
+		{
+			writer.WriteStartElement("soap", "Envelope", "http://schemas.xmlsoap.org/soap/envelope/");
+			writer.WriteXmlnsAttribute("soap", "http://schemas.xmlsoap.org/soap/envelope/");
+		}
+
+		protected override void OnWriteStartHeaders(XmlDictionaryWriter writer)
+		{
+			writer.WriteStartElement("SOAP-ENV", "Header", "http://schemas.xmlsoap.org/soap/envelope/");
+			//writer.WriteXmlnsAttribute("soap", "http://schemas.xmlsoap.org/soap/envelope/");
+		}
 
 		protected override void OnWriteStartBody(XmlDictionaryWriter writer)
 		{
-			writer.WriteStartElement("Body", "http://www.w3.org/2003/05/soap-envelope");
+			writer.WriteStartElement("Body", "http://schemas.xmlsoap.org/soap/envelope/");
 			writer.WriteXmlnsAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance");
 			writer.WriteXmlnsAttribute("xsd", "http://www.w3.org/2001/XMLSchema");
 		}
