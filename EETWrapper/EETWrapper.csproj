@@ -57,6 +57,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -94,6 +95,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceHelpers\EETMessageFormatter.cs" />
     <Compile Include="ServiceHelpers\XmlHelper.cs" />
+    <Compile Include="SignatureBehavior\SignedXmlWithId.cs" />
+    <Compile Include="SignatureBehavior\SignMessageBehavior.cs" />
+    <Compile Include="SignatureBehavior\SignMessageWithCertificateInspector.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

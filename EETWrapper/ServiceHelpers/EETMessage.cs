@@ -42,6 +42,9 @@ namespace EETWrapper.ServiceHelpers
 			writer.WriteStartElement("Body", "http://schemas.xmlsoap.org/soap/envelope/");
 			writer.WriteXmlnsAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance");
 			writer.WriteXmlnsAttribute("xsd", "http://www.w3.org/2001/XMLSchema");
+			writer.WriteXmlnsAttribute("wsu", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd");
+
+			//writer.WriteAttributeString("wsu", "Id", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd", $"Body-{Guid.NewGuid():D}");
 		}
 		
 		protected override void OnWriteBodyContents(XmlDictionaryWriter writer)

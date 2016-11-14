@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Net.Security;
 using EETWrapper.ServiceHelpers;
 
 namespace EETWrapper.EETService_v311
@@ -15,17 +16,17 @@ namespace EETWrapper.EETService_v311
 
 
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-	[System.ServiceModel.ServiceContractAttribute(Namespace = "http://fs.mfcr.cz/eet/schema/v3", ConfigurationName = "EETService_v311.EET")]
+	[System.ServiceModel.ServiceContractAttribute(Namespace = "http://fs.mfcr.cz/eet/schema/v3", ConfigurationName = "EETService_v311.EET", ProtectionLevel = ProtectionLevel.Sign)]
 	public interface EET
 	{
 
-		[System.ServiceModel.OperationContractAttribute(Action = "http://fs.mfcr.cz/eet/OdeslaniTrzby", ReplyAction = "*")]
+		[System.ServiceModel.OperationContractAttribute(Action = "http://fs.mfcr.cz/eet/OdeslaniTrzby", ReplyAction = "*", ProtectionLevel = ProtectionLevel.Sign)]
 		[System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults = true)]
 		[EETFormatMessage]
 		EETWrapper.EETService_v311.OdeslaniTrzbyResponse OdeslaniTrzby(EETWrapper.EETService_v311.OdeslaniTrzbyRequest request);
 
 		// CODEGEN: Generating message contract since the operation has multiple return values.
-		[System.ServiceModel.OperationContractAttribute(Action = "http://fs.mfcr.cz/eet/OdeslaniTrzby", ReplyAction = "*")]
+		[System.ServiceModel.OperationContractAttribute(Action = "http://fs.mfcr.cz/eet/OdeslaniTrzby", ReplyAction = "*", ProtectionLevel = ProtectionLevel.Sign)]
 		System.Threading.Tasks.Task<EETWrapper.EETService_v311.OdeslaniTrzbyResponse> OdeslaniTrzbyAsync(EETWrapper.EETService_v311.OdeslaniTrzbyRequest request);
 	}
 

@@ -11,6 +11,7 @@ using EETWrapper.Data;
 using EETWrapper.EETService_v311;
 using EETWrapper.Interfaces;
 using EETWrapper.Mappers;
+using EETWrapper.SignatureBehavior;
 
 namespace EETWrapper
 {
@@ -86,7 +87,9 @@ namespace EETWrapper
 		{
 			logTrace("Creating EETClient object " + (string.IsNullOrEmpty(customEndPointName) ? "with default": $"with custom endpoint name: {customEndPointName}" ));
 			EETClient client = string.IsNullOrEmpty(customEndPointName)? new EETClient(): new EETClient(customEndPointName);
-			
+
+			client.Endpoint.Behaviors.Add(new SignMessageWithCertificateBehavior(taxpayersCertificate));
+
 			return client;
 		}
 
