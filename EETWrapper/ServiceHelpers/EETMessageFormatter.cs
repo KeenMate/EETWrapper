@@ -15,6 +15,7 @@ namespace EETWrapper.ServiceHelpers
 		public Message SerializeRequest(MessageVersion messageVersion, object[] parameters)
 		{
 			var message = this.formatter.SerializeRequest(messageVersion, parameters);
+			
 			return new EETMessage(message, parameters);
 		}
 
