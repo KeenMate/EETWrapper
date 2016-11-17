@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Deployment.Internal.CodeSigning;
+using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
@@ -35,18 +37,13 @@ namespace EETWrapper.SignatureBehavior
 
 			fullBody.Close();
 
-
 			var guid = Guid.NewGuid();
 			XmlDocument doc = new XmlDocument();
 			doc.PreserveWhitespace = true;
 			doc.LoadXml(tmpMessage.ToString());
-			
 
-			// Add the required namespaces to the SOAP Envelope element, if I don't do this, the web service I'm calling returns an error
-			string soapSecNS = EETNamespaces.WSSecurityExtensions;
-			
 			//http://www.w3.org/2000/09/xmldsig#
-					 //Get the header element, so that we can add the digital signature to it
+			//Get the header element, so that we can add the digital signature to it
 			XmlNode headerNode = doc.GetElementsByTagName("Header", EETNamespaces.SOAP11Envelope)[0];
 
 			// Set the ID attribute on the body element, so that we can reference it later
@@ -60,7 +57,7 @@ namespace EETWrapper.SignatureBehavior
 			((XmlElement)bodyNode).SetAttribute("id", EETNamespaces.WSSecurityUtility, $"Body-{guid:D}");
 
 			XmlWriterSettings settings2 = new XmlWriterSettings();
-			settings2.Encoding = new System.Text.UTF8Encoding(false);
+			settings2.Encoding = new UTF8Encoding(false);
 
 			// Load the certificate we want to use for signing
 			SignedXmlWithId signedXml = new SignedXmlWithId(doc);
@@ -68,15 +65,14 @@ namespace EETWrapper.SignatureBehavior
 			CryptoConfig.AddAlgorithm(typeof(RSAPKCS1SHA256SignatureDescription),
 				EETNamespaces.Signature_RSASHA256);
 
-
-		 // Note that this will return a Basic crypto provider, with only SHA-1 support
-		 var privKey = (RSACryptoServiceProvider)Certificate.PrivateKey;
+			// Note that this will return a Basic crypto provider, with only SHA-1 support
+			var privKey = (RSACryptoServiceProvider)Certificate.PrivateKey;
 			// Force use of the Enhanced RSA and AES Cryptographic Provider with openssl-generated SHA256 keys
 			var enhCsp = new RSACryptoServiceProvider().CspKeyContainerInfo;
 			var cspparams = new CspParameters(enhCsp.ProviderType, enhCsp.ProviderName, privKey.CspKeyContainerInfo.KeyContainerName);
 
 			RSACryptoServiceProvider key = new RSACryptoServiceProvider(cspparams);
-		
+
 			signedXml.SigningKey = key;
 
 			//< ds:SignatureMethod Algorithm = EETNamespaces.Signature_RSASHA256 />
@@ -84,7 +80,6 @@ namespace EETWrapper.SignatureBehavior
 			signedXml.Signature.SignedInfo.CanonicalizationMethod = EETNamespaces.CanonicalizationMethod;
 			//Populate the KeyInfo element correctly, with the public cert and public key
 			Signature sigElement = signedXml.Signature;
-			KeyInfoX509Data x509Data = new KeyInfoX509Data(Certificate);
 
 			KeyInfoNode keyNode = new KeyInfoNode();
 
@@ -142,9 +137,7 @@ namespace EETWrapper.SignatureBehavior
 			// it to an XmlElement object.
 			XmlElement xmlDigitalSignature = signedXml.GetXml();
 
-					//< wsse:Security xmlns:wsse = EETNamespaces.WSSecurityExtensions xmlns: wsu = EETNamespaces.WSSecurityUtility soap: mustUnderstand = "1" >
-
-
+			//< wsse:Security xmlns:wsse = EETNamespaces.WSSecurityExtensions xmlns: wsu = EETNamespaces.WSSecurityUtility soap: mustUnderstand = "1" >
 			XmlElement security = doc.CreateElement("wsse", "Security", EETNamespaces.WSSecurityExtensions);
 			security.SetAttribute("xmlns:wsu",
 				EETNamespaces.WSSecurityUtility);
@@ -164,9 +157,9 @@ namespace EETWrapper.SignatureBehavior
 
 			// Make sure the byte order mark doesn't get written out
 			XmlDictionaryReaderQuotas quotas = new XmlDictionaryReaderQuotas();
-			Encoding encoderWithoutBOM = new System.Text.UTF8Encoding(false);
+			Encoding encoderWithoutBOM = new UTF8Encoding(false);
 
-			System.IO.MemoryStream ms = new System.IO.MemoryStream(encoderWithoutBOM.GetBytes(doc.InnerXml));
+			MemoryStream ms = new MemoryStream(encoderWithoutBOM.GetBytes(doc.InnerXml));
 
 			XmlDictionaryReader xdr = XmlDictionaryReader.CreateTextReader(ms, encoderWithoutBOM, quotas, null);
 
@@ -179,7 +172,37 @@ namespace EETWrapper.SignatureBehavior
 
 		public void AfterReceiveReply(ref Message reply, object correlationState)
 		{
+			XmlDictionaryReader fullBody = reply.GetReaderAtBodyContents();
+			//MessageBuffer buffer = reply.CreateBufferedCopy(Int32.MaxValue);
+			//reply = buffer.CreateMessage();
+			XmlDocument xdoc = new XmlDocument();
 
+			xdoc.Load(fullBody);
+			fullBody.Close();
+			
+	#warning NOT SAFE AT ALL
+			var emptyMessage = Message.CreateMessage(MessageVersion.Soap11, "");
+
+			XmlDocument doc = new XmlDocument();
+			doc.PreserveWhitespace = true;
+			doc.LoadXml(emptyMessage.ToString());
+
+			// Set the ID attribute on the body element, so that we can reference it later
+			XmlNode bodyNode = doc.GetElementsByTagName("Body", EETNamespaces.SOAP11Envelope)[0];
+
+			var importedNode = doc.ImportNode(xdoc.DocumentElement, true);
+			bodyNode.AppendChild(importedNode);
+
+			XmlDictionaryReaderQuotas quotas = new XmlDictionaryReaderQuotas();
+			Encoding encoderWithoutBOM = new UTF8Encoding(false);
+
+			MemoryStream ms = new MemoryStream(encoderWithoutBOM.GetBytes(doc.InnerXml));
+
+			XmlDictionaryReader xdr = XmlDictionaryReader.CreateTextReader(ms, encoderWithoutBOM, quotas, null);
+
+			//Create the new message, that has the digital signature in the header
+			Message newMessage = Message.CreateMessage(xdr, System.Int32.MaxValue, reply.Version);
+			reply = newMessage;
 		}
 	}
 }
