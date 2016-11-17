@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.ServiceModel.Channels;
 using System.Xml;
+using EETWrapper.Data;
 using EETWrapper.EETService_v311;
 
 
@@ -27,29 +28,29 @@ namespace EETWrapper.ServiceHelpers
 
 		protected override void OnWriteStartEnvelope(XmlDictionaryWriter writer)
 		{
-			writer.WriteStartElement("soap", "Envelope", "http://schemas.xmlsoap.org/soap/envelope/");
-			writer.WriteXmlnsAttribute("soap", "http://schemas.xmlsoap.org/soap/envelope/");
+			writer.WriteStartElement("soap", "Envelope", EETNamespaces.SOAP11Envelope);
+			writer.WriteXmlnsAttribute("soap", EETNamespaces.SOAP11Envelope);
 		}
 
 		protected override void OnWriteStartHeaders(XmlDictionaryWriter writer)
 		{
-			writer.WriteStartElement("SOAP-ENV", "Header", "http://schemas.xmlsoap.org/soap/envelope/");
-			//writer.WriteXmlnsAttribute("soap", "http://schemas.xmlsoap.org/soap/envelope/");
+			writer.WriteStartElement("SOAP-ENV", "Header", EETNamespaces.SOAP11Envelope);
+			//writer.WriteXmlnsAttribute("soap", EETNamespaces.SOAP11Envelope);
 		}
 
 		protected override void OnWriteStartBody(XmlDictionaryWriter writer)
 		{
-			writer.WriteStartElement("Body", "http://schemas.xmlsoap.org/soap/envelope/");
-			writer.WriteXmlnsAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance");
-			writer.WriteXmlnsAttribute("xsd", "http://www.w3.org/2001/XMLSchema");
-			writer.WriteXmlnsAttribute("wsu", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd");
+			writer.WriteStartElement("Body", EETNamespaces.SOAP11Envelope);
+			writer.WriteXmlnsAttribute("xsi", EETNamespaces.XMLSchemaInstance);
+			writer.WriteXmlnsAttribute("xsd", EETNamespaces.XMLSchema);
+			writer.WriteXmlnsAttribute("wsu", EETNamespaces.WSSecurityUtility);
 
-			//writer.WriteAttributeString("wsu", "Id", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd", $"Body-{Guid.NewGuid():D}");
+			//writer.WriteAttributeString("wsu", "Id", EETNamespaces.WSSecurityUtility, $"Body-{Guid.NewGuid():D}");
 		}
 		
 		protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
 		{
-			//< Trzba xmlns = "http://fs.mfcr.cz/eet/schema/v3" xmlns: xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns: xsd = "http://www.w3.org/2001/XMLSchema" >
+			//< Trzba xmlns = EETNamespaces.EETSchemaV3 xmlns: xsi = EETNamespaces.XMLSchemaInstance xmlns: xsd = EETNamespaces.XMLSchema >
 			//  < Hlavicka uuid_zpravy = "b11a6061-6f8a-4f51-86a4-0e164ffa5a37" dat_odesl = "2016-09-15T22:01:51+02:00" prvni_zaslani = "true" />
 			//	< Data dic_popl = "CZ00000019" dic_poverujiciho = "CZ683555118" id_provoz = "273" id_pokl = "/5546/RO24" porad_cis = "0/6460/ZQ42" dat_trzby = "2016-08-05T00:30:12+02:00" celk_trzba = "34113.00" urceno_cerp_zuct = "324" rezim = "0" />
 			//	< KontrolniKody >
@@ -123,7 +124,7 @@ namespace EETWrapper.ServiceHelpers
 						b.WriteString(cc.bkp.Text[0]);
 					});
 				});
-			}), "http://fs.mfcr.cz/eet/schema/v3");
+			}), EETNamespaces.EETSchemaV3);
 
 		}
 		
