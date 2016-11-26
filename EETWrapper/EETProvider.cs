@@ -148,8 +148,6 @@ namespace EETWrapper
 					eetResponse = new EETResponse(ResultTypes.Success, new Guid(odpovedHlavickaType.uuid_zpravy));
 				}
 
-				
-
 				return eetResponse;
 			}
 			catch (Exception ex)
