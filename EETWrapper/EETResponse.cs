@@ -16,6 +16,14 @@ namespace EETWrapper
 
 		public List<EETWarning> Warnings { get; private set; }
 
+		public bool TestRun { get; set; }
+
+		public string Fik { get; set; }
+
+		public string Bkp { get; set; }
+
+		public DateTime ResponseTime { get; set; }
+
 		public EETResponse()
 		{
 		}

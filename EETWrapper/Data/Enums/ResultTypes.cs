@@ -4,6 +4,7 @@
 	{
 		Success,
 		SuccessWithWarnings,
+		Error,
 		ClientFailure,
 		ServerFailure
 	}

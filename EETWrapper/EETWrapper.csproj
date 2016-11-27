@@ -87,6 +87,7 @@
     <Compile Include="EETProvider.cs" />
     <Compile Include="EETData.cs" />
     <Compile Include="EETResponse.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Mappers\EETDataMappers.cs" />
     <Compile Include="Service References\EETService_v311\Reference.cs">
@@ -161,6 +162,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

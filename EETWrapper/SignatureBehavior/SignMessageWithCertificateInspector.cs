@@ -16,6 +16,7 @@ using EETWrapper.ServiceHelpers;
 
 namespace EETWrapper.SignatureBehavior
 {
+	
 	public class SignMessageWithCertificateInspector : IClientMessageInspector
 	{
 		public X509Certificate2 Certificate { get; private set; }

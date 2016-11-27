@@ -70,6 +70,24 @@ namespace EETWrapper.Assets {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to EET call ended with error {0}.
+        /// </summary>
+        internal static string ReceivedError {
+            get {
+                return ResourceManager.GetString("ReceivedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EET call ended with success, Fik {0}, Bkp {1}.
+        /// </summary>
+        internal static string ReceivedSuccess {
+            get {
+                return ResourceManager.GetString("ReceivedSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Searching for certificate by name .
         /// </summary>
         internal static string SearchingForCertByName {

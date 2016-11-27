@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using EETWrapper.Assets;
 using EETWrapper.Data;
 using EETWrapper.EETService_v311;
+using EETWrapper.Extensions;
 using EETWrapper.Interfaces;
 using EETWrapper.Mappers;
 using EETWrapper.SignatureBehavior;
@@ -140,12 +141,19 @@ namespace EETWrapper
 				if(response is OdpovedChybaType)
 				{
 					OdpovedChybaType o = (OdpovedChybaType) response;
-					
-					eetResponse = new EETResponse(ResultTypes.SuccessWithWarnings, new List<EETWarning>() {new EETWarning(o.kod, o.Text[0])});
+					logWarn(Messages.ReceivedError.Fill($"({o.kod}) {o.Text[0]}"));
+					eetResponse = new EETResponse(ResultTypes.Error, new List<EETWarning>() {new EETWarning(o.kod, o.Text[0])});
+					eetResponse.ResponseTime = odpovedHlavickaType.dat_odmit;
 				}
 				else
 				{
+					OdpovedPotvrzeniType o = (OdpovedPotvrzeniType)response;
+					logInfo(Messages.ReceivedSuccess.Fill(o.fik, odpovedHlavickaType.bkp));
 					eetResponse = new EETResponse(ResultTypes.Success, new Guid(odpovedHlavickaType.uuid_zpravy));
+					eetResponse.ResponseTime = odpovedHlavickaType.dat_prij;
+					eetResponse.Fik = o.fik;
+					eetResponse.Bkp = odpovedHlavickaType.bkp;
+					eetResponse.TestRun = o.test;
 				}
 
 				return eetResponse;

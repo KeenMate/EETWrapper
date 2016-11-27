@@ -120,6 +120,12 @@
   <data name="OpeningPersonalCurrentUserCertStore" xml:space="preserve">
     <value>Opening personal certificate store of current user</value>
   </data>
+  <data name="ReceivedError" xml:space="preserve">
+    <value>EET call ended with error {0}</value>
+  </data>
+  <data name="ReceivedSuccess" xml:space="preserve">
+    <value>EET call ended with success, Fik {0}, Bkp {1}</value>
+  </data>
   <data name="SearchingForCertByName" xml:space="preserve">
     <value>Searching for certificate by name </value>
   </data>
