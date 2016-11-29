@@ -34,41 +34,42 @@ namespace EETTester
 
 		static void sendThroughProvider()
 		{
-			EETProvider provider = new EETProvider("CZ00000019");
+			EETProvider provider = new EETProvider("CZ26791706");
 
 			provider.OnLogChange += Provider_OnLogChange;
 
 			EETData data = new EETData();
-			data.TaxID = "CZ00000019";
+			data.TestRun = true;
+			data.TaxID = "CZ26791706";
 			//data.AppointingPayerTaxID = "CZ683555118";
-			data.BusinessPremisesID = 273;
-			data.CashRegisterID = "/5546/RO24";
-			data.ReceiptID = "0/6460/ZQ42";
+			data.BusinessPremisesID = 11;
+			data.CashRegisterID = "B1/1";
+			data.ReceiptID = "B1/1/1";
 
-			data.TotalAmountOfSale = 34113.00M;
+			data.TotalAmountOfSale = 1M;
 
-			data.AdditionalData = new AdditionalData();
+			//data.AdditionalData = new AdditionalData();
 
-			data.AdditionalData.TotalAmountOfPaymentsSubsequentlyDrawOrSettled = 679;
+			//data.AdditionalData.TotalAmountOfPaymentsSubsequentlyDrawOrSettled = 679;
 
-			data.AdditionalData.TotalAmountVATForTravelService = 5460;
+			//data.AdditionalData.TotalAmountVATForTravelService = 5460;
 
-			data.AdditionalData.TotalAmountVATForSaleUsedGoods_BasicVATRate = 784;
-			data.AdditionalData.TotalAmountVATForSaleUsedGoods_FirstReducedVATRate = 967;
-			data.AdditionalData.TotalAmountVATForSaleUsedGoods_SecondReducedVATRate = 189;
+			//data.AdditionalData.TotalAmountVATForSaleUsedGoods_BasicVATRate = 784;
+			//data.AdditionalData.TotalAmountVATForSaleUsedGoods_FirstReducedVATRate = 967;
+			//data.AdditionalData.TotalAmountVATForSaleUsedGoods_SecondReducedVATRate = 189;
 
-			data.AdditionalData.TotalAmountOfPaymentsForSubsequentDrawingOrSettlement = 324;
+			//data.AdditionalData.TotalAmountOfPaymentsForSubsequentDrawingOrSettlement = 324;
 
-			data.AdditionalData.TotalTaxBase_BasicVATRate = -820.92M;
-			data.AdditionalData.TotalVAT_BasicVATRate = -172.39M;
+			//data.AdditionalData.TotalTaxBase_BasicVATRate = -820.92M;
+			//data.AdditionalData.TotalVAT_BasicVATRate = -172.39M;
 
-			data.AdditionalData.TotalTaxBase_FirstReducedVATRate = -3538.20M;
-			data.AdditionalData.TotalVAT_FirstReducedVATRate = -530.73M;
+			//data.AdditionalData.TotalTaxBase_FirstReducedVATRate = -3538.20M;
+			//data.AdditionalData.TotalVAT_FirstReducedVATRate = -530.73M;
 
-			data.AdditionalData.TotalTaxBase_SecondReducedVATRate = 9756.46M;
-			data.AdditionalData.TotalVAT_SecondReducedVATRate = 975.65M;
+			//data.AdditionalData.TotalTaxBase_SecondReducedVATRate = 9756.46M;
+			//data.AdditionalData.TotalVAT_SecondReducedVATRate = 975.65M;
 
-			data.AdditionalData.TotalAmountExemptedFromVAT = 3036.00M;
+			//data.AdditionalData.TotalAmountExemptedFromVAT = 3036.00M;
 
 			var response = provider.SendData(data);
 
@@ -148,6 +149,7 @@ namespace EETTester
 				hlavicka.uuid_zpravy = Guid.NewGuid().ToString();
 				hlavicka.dat_odesl = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour,
 					DateTime.Now.Minute, DateTime.Now.Second, DateTimeKind.Local);
+				
 				hlavicka.overeni = true;
 
 				TrzbaDataType data = new TrzbaDataType();

@@ -1,5 +1,11 @@
 ﻿namespace EETWrapper.Data
 {
+	public enum ErrorTypes
+	{
+		InvalidSOAPMessageSignature = 4,
+		InvalidTaxpayerSecurityCode = 5
+	}
+
 	public enum WarningTypes
 	{
 		/// <summary>
