@@ -69,8 +69,12 @@ namespace EETWrapper.ServiceHelpers
 
 				var odpovedPotvrzeniType = new OdpovedPotvrzeniType();
 				odpovedPotvrzeniType.fik = validResponse.GetAttribute("fik", "");
-				odpovedPotvrzeniType.test = Convert.ToBoolean(validResponse.GetAttribute("test", ""));
-				odpovedPotvrzeniType.testSpecified = true;
+
+				if(!string.IsNullOrEmpty(validResponse.GetAttribute("test", "")))
+				{
+					odpovedPotvrzeniType.test = Convert.ToBoolean(validResponse.GetAttribute("test", ""));
+					odpovedPotvrzeniType.testSpecified = true;
+				}
 
 				response.Item = odpovedPotvrzeniType;
 				
@@ -95,9 +99,11 @@ namespace EETWrapper.ServiceHelpers
 				{
 					var error = new OdpovedChybaType();
 					error.kod = Convert.ToInt16(errorResponse.GetAttribute("kod", ""));
-					error.test = Convert.ToBoolean(header.GetAttribute("test", ""));
+					var testAttr = header.GetAttribute("test", "");
+					if(!string.IsNullOrEmpty(testAttr))
+						error.test = Convert.ToBoolean(testAttr);
 					error.testSpecified = true;
-
+					error.Text = new[] {errorResponse.InnerXml};
 					response.Item = error;
 				}
 			}

@@ -162,7 +162,8 @@ namespace EETWrapper
 			{
 				logError("Could not call the service.", ex);
 				eetResponse = new EETResponse(ResultTypes.ClientFailure, "An error has occured while calling the server. Please, check the log for more information.");
-				return eetResponse;
+			    eetResponse.TestRun = data.TestRun;
+                return eetResponse;
 			}
 		}
 

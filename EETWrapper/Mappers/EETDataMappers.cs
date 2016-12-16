@@ -17,6 +17,7 @@ namespace EETWrapper.Mappers
 			hlavicka.uuid_zpravy = data.UUID.ToString();
 			hlavicka.dat_odesl = data.CreationDate;
 			hlavicka.overeni = data.TestRun;
+			hlavicka.overeniSpecified = true;
 
 			return hlavicka;
 		}
