@@ -1,0 +1,542 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EETWrapper</name>
+    </assembly>
+    <members>
+        <member name="T:EETWrapper.Assets.Exceptions">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:EETWrapper.Assets.Exceptions.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:EETWrapper.Assets.Exceptions.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:EETWrapper.Assets.Exceptions.CertificateCannotNotBeNull">
+            <summary>
+              Looks up a localized string similar to You must provide a certificate to EETProvider to work properly..
+            </summary>
+        </member>
+        <member name="P:EETWrapper.Assets.Exceptions.CouldNotFindTaxpayersCertificate">
+            <summary>
+              Looks up a localized string similar to Could not find taxpayer&apos;s certificate with name {0} in your personal certification store..
+            </summary>
+        </member>
+        <member name="P:EETWrapper.Assets.Exceptions.MoreThanOneTaxpayersCertificate">
+            <summary>
+              Looks up a localized string similar to There is more than one certificate with name {0} in your personal certification store..
+            </summary>
+        </member>
+        <member name="T:EETWrapper.Assets.Messages">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:EETWrapper.Assets.Messages.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:EETWrapper.Assets.Messages.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:EETWrapper.Assets.Messages.OpeningPersonalCurrentUserCertStore">
+            <summary>
+              Looks up a localized string similar to Opening personal certificate store of current user.
+            </summary>
+        </member>
+        <member name="P:EETWrapper.Assets.Messages.ReceivedError">
+            <summary>
+              Looks up a localized string similar to EET call ended with error {0}.
+            </summary>
+        </member>
+        <member name="P:EETWrapper.Assets.Messages.ReceivedSuccess">
+            <summary>
+              Looks up a localized string similar to EET call ended with success, Fik {0}, Bkp {1}.
+            </summary>
+        </member>
+        <member name="P:EETWrapper.Assets.Messages.SearchingForCertByName">
+            <summary>
+              Looks up a localized string similar to Searching for certificate by name .
+            </summary>
+        </member>
+        <member name="P:EETWrapper.Assets.Messages.SendingEETData">
+            <summary>
+              Looks up a localized string similar to Sending EET data.
+            </summary>
+        </member>
+        <member name="F:EETWrapper.Data.EETNamespaces.SOAP11Envelope">
+            <summary>
+            http://schemas.xmlsoap.org/soap/envelope/
+            </summary>
+        </member>
+        <member name="F:EETWrapper.Data.EETNamespaces.EETSchemaV3">
+            <summary>
+            http://fs.mfcr.cz/eet/schema/v3
+            </summary>
+        </member>
+        <member name="F:EETWrapper.Data.EETNamespaces.WSSecurityUtility">
+            <summary>
+            http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd
+            </summary>
+        </member>
+        <member name="F:EETWrapper.Data.EETNamespaces.WSSecurityExtensions">
+            <summary>
+            http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+            </summary>
+        </member>
+        <member name="F:EETWrapper.Data.EETNamespaces.Signature">
+            <summary>
+            http://www.w3.org/2000/09/xmldsig#
+            </summary>
+        </member>
+        <member name="F:EETWrapper.Data.EETNamespaces.Signature_RSASHA256">
+            <summary>
+            http://www.w3.org/2001/04/xmldsig-more#rsa-sha256
+            </summary>
+        </member>
+        <member name="F:EETWrapper.Data.EETNamespaces.CanonicalizationMethod">
+            <summary>
+            http://www.w3.org/2001/10/xml-exc-c14n#
+            </summary>
+        </member>
+        <member name="F:EETWrapper.Data.EETNamespaces.Base64BinaryEncoding">
+            <summary>
+            http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary
+            </summary>
+        </member>
+        <member name="F:EETWrapper.Data.EETNamespaces.x509v3ValueType">
+            <summary>
+            http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3
+            </summary>
+        </member>
+        <member name="F:EETWrapper.Data.EETNamespaces.XMLSchema">
+            <summary>
+            http://www.w3.org/2001/XMLSchema
+            </summary>
+        </member>
+        <member name="F:EETWrapper.Data.EETNamespaces.XMLSchemaInstance">
+            <summary>
+            http://www.w3.org/2001/XMLSchema-instance
+            </summary>
+        </member>
+        <member name="F:EETWrapper.Data.WarningTypes.TaxpayersIDDoesNotMatchCertificate">
+            <summary>
+            The taxpayer identification codes (DIČ) in the message and certificate differ
+            </summary>
+        </member>
+        <member name="F:EETWrapper.Data.WarningTypes.InvalidTaxIdentificationNumber">
+            <summary>
+            Invalid structure of tax identification number of the appointing taxpayer
+            </summary>
+        </member>
+        <member name="F:EETWrapper.Data.WarningTypes.InvalidTaxpayersSignature">
+            <summary>
+            Invalid value of Taxpayer’s signature code (PKP)
+            </summary>
+        </member>
+        <member name="F:EETWrapper.Data.WarningTypes.TimeOfSaleIsTooNew">
+            <summary>
+            The date and time of sale is newer than the date and time of data message acceptance
+            </summary>
+        </member>
+        <member name="F:EETWrapper.Data.WarningTypes.TimeOfSaleIsFarInPast">
+            <summary>
+            The date and time of sale is far in the past
+            </summary>
+        </member>
+        <member name="M:EETWrapper.EETProvider.#ctor(System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+            X509 taxpayer's certificate
+            </summary>
+            <param name="taxpayersCertificate"></param>
+        </member>
+        <member name="P:EETWrapper.EETData.UUID">
+            <summary>
+            Message's UUID - always unique per message
+            </summary>
+        </member>
+        <member name="P:EETWrapper.EETData.CreationDate">
+            <summary>
+            Date and time of sending
+            </summary>
+        </member>
+        <member name="P:EETWrapper.EETData.TestRun">
+            <summary>
+            Flag of verification sending mode  
+            </summary>
+        </member>
+        <member name="P:EETWrapper.EETData.TaxID">
+            <summary>
+            Tax identification number
+            </summary>
+        </member>
+        <member name="P:EETWrapper.EETData.AppointingPayerTaxID">
+            <summary>
+            Appointing taxpayer tax identification number
+            </summary>
+        </member>
+        <member name="P:EETWrapper.EETData.BusinessPremisesID">
+            <summary>
+            Business premises ID
+            </summary>
+        </member>
+        <member name="P:EETWrapper.EETData.CashRegisterID">
+            <summary>
+            Cash register ID
+            </summary>
+        </member>
+        <member name="P:EETWrapper.EETData.ReceiptID">
+            <summary>
+            Serial number of receipt
+            </summary>
+        </member>
+        <member name="P:EETWrapper.EETData.TotalAmountOfSale">
+            <summary>
+            Total amount of sale
+            </summary>
+        </member>
+        <member name="P:EETWrapper.EETData.AdditionalData">
+            <summary>
+            Additional data relevant to bigger taxpayers. These are optional.
+            </summary>
+        </member>
+        <member name="P:EETWrapper.AdditionalData.TotalAmountExemptedFromVAT">
+            <summary>
+            Total amount for performance exempted from VAT, other performance
+            </summary>
+        </member>
+        <member name="P:EETWrapper.AdditionalData.TotalTaxBase_BasicVATRate">
+            <summary>
+            Total tax base ‐ basic VAT rate 
+            </summary>
+        </member>
+        <member name="P:EETWrapper.AdditionalData.TotalVAT_BasicVATRate">
+            <summary>
+            Total VAT ‐ basic VAT rate
+            </summary>
+        </member>
+        <member name="P:EETWrapper.AdditionalData.TotalTaxBase_FirstReducedVATRate">
+            <summary>
+            Total tax base ‐ first reduced VAT rate
+            </summary>
+        </member>
+        <member name="P:EETWrapper.AdditionalData.TotalVAT_FirstReducedVATRate">
+            <summary>
+            Total VAT ‐ first reduced VAT rate 
+            </summary>
+        </member>
+        <member name="P:EETWrapper.AdditionalData.TotalTaxBase_SecondReducedVATRate">
+            <summary>
+            Total tax base ‐ second reduced VAT rate
+            </summary>
+        </member>
+        <member name="P:EETWrapper.AdditionalData.TotalVAT_SecondReducedVATRate">
+            <summary>
+            Total VAT ‐ second reduced VAT rate 
+            </summary>
+        </member>
+        <member name="P:EETWrapper.AdditionalData.TotalAmountVATForTravelService">
+            <summary>
+            Total amount under the VAT scheme for travel service
+            </summary>
+        </member>
+        <member name="P:EETWrapper.AdditionalData.TotalAmountVATForSaleUsedGoods_BasicVATRate">
+            <summary>
+            Total amount under the VAT scheme for the sale of used goods ‐ basic VATrate
+            </summary>
+        </member>
+        <member name="P:EETWrapper.AdditionalData.TotalAmountVATForSaleUsedGoods_FirstReducedVATRate">
+            <summary>
+            Total amount under the VAT scheme for the sale of used goods ‐ first reduced VAT rate
+            </summary>
+        </member>
+        <member name="P:EETWrapper.AdditionalData.TotalAmountVATForSaleUsedGoods_SecondReducedVATRate">
+            <summary>
+            Total amount under the VAT scheme for the sale of used goods ‐ second reduced VAT rate
+            </summary>
+        </member>
+        <member name="P:EETWrapper.AdditionalData.TotalAmountOfPaymentsForSubsequentDrawingOrSettlement">
+            <summary>
+            Total amount of payments intended for subsequent drawing or settlement
+            </summary>
+        </member>
+        <member name="P:EETWrapper.AdditionalData.TotalAmountOfPaymentsSubsequentlyDrawOrSettled">
+            <summary>
+            Total amount of payments which are payments subsequently drawn or settled
+            </summary>
+        </member>
+        <member name="M:EETWrapper.EETResponse.#ctor(EETWrapper.Data.ResultTypes,System.Collections.Generic.List{EETWrapper.EETWarning})">
+            <summary>
+            Used only for failures
+            </summary>
+            <param name="type">Most likely a client failure</param>
+            <param name="warnings">Message for the user</param>
+        </member>
+        <member name="T:EETWrapper.EETService_v311.TrzbaHlavickaType">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaHlavickaType.uuid_zpravy">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaHlavickaType.dat_odesl">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaHlavickaType.prvni_zaslani">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaHlavickaType.overeni">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaHlavickaType.overeniSpecified">
+            <remarks/>
+        </member>
+        <member name="T:EETWrapper.EETService_v311.OdpovedVarovaniType">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.OdpovedVarovaniType.kod_varov">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.OdpovedVarovaniType.Text">
+            <remarks/>
+        </member>
+        <member name="T:EETWrapper.EETService_v311.OdpovedChybaType">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.OdpovedChybaType.kod">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.OdpovedChybaType.test">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.OdpovedChybaType.testSpecified">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.OdpovedChybaType.Text">
+            <remarks/>
+        </member>
+        <member name="T:EETWrapper.EETService_v311.OdpovedPotvrzeniType">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.OdpovedPotvrzeniType.fik">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.OdpovedPotvrzeniType.test">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.OdpovedPotvrzeniType.testSpecified">
+            <remarks/>
+        </member>
+        <member name="T:EETWrapper.EETService_v311.OdpovedHlavickaType">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.OdpovedHlavickaType.uuid_zpravy">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.OdpovedHlavickaType.bkp">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.OdpovedHlavickaType.dat_prij">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.OdpovedHlavickaType.dat_prijSpecified">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.OdpovedHlavickaType.dat_odmit">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.OdpovedHlavickaType.dat_odmitSpecified">
+            <remarks/>
+        </member>
+        <member name="T:EETWrapper.EETService_v311.BkpElementType">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.BkpElementType.digest">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.BkpElementType.encoding">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.BkpElementType.Text">
+            <remarks/>
+        </member>
+        <member name="T:EETWrapper.EETService_v311.BkpDigestType">
+            <remarks/>
+        </member>
+        <member name="F:EETWrapper.EETService_v311.BkpDigestType.SHA1">
+            <remarks/>
+        </member>
+        <member name="T:EETWrapper.EETService_v311.BkpEncodingType">
+            <remarks/>
+        </member>
+        <member name="F:EETWrapper.EETService_v311.BkpEncodingType.base16">
+            <remarks/>
+        </member>
+        <member name="T:EETWrapper.EETService_v311.PkpElementType">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.PkpElementType.digest">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.PkpElementType.cipher">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.PkpElementType.encoding">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.PkpElementType.Text">
+            <remarks/>
+        </member>
+        <member name="T:EETWrapper.EETService_v311.PkpDigestType">
+            <remarks/>
+        </member>
+        <member name="F:EETWrapper.EETService_v311.PkpDigestType.SHA256">
+            <remarks/>
+        </member>
+        <member name="T:EETWrapper.EETService_v311.PkpCipherType">
+            <remarks/>
+        </member>
+        <member name="F:EETWrapper.EETService_v311.PkpCipherType.RSA2048">
+            <remarks/>
+        </member>
+        <member name="T:EETWrapper.EETService_v311.PkpEncodingType">
+            <remarks/>
+        </member>
+        <member name="F:EETWrapper.EETService_v311.PkpEncodingType.base64">
+            <remarks/>
+        </member>
+        <member name="T:EETWrapper.EETService_v311.TrzbaKontrolniKodyType">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaKontrolniKodyType.pkp">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaKontrolniKodyType.bkp">
+            <remarks/>
+        </member>
+        <member name="T:EETWrapper.EETService_v311.TrzbaDataType">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.dic_popl">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.dic_poverujiciho">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.id_provoz">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.id_pokl">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.porad_cis">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.dat_trzby">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.celk_trzba">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.zakl_nepodl_dph">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.zakl_nepodl_dphSpecified">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.zakl_dan1">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.zakl_dan1Specified">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.dan1">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.dan1Specified">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.zakl_dan2">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.zakl_dan2Specified">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.dan2">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.dan2Specified">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.zakl_dan3">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.zakl_dan3Specified">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.dan3">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.dan3Specified">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.cest_sluz">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.cest_sluzSpecified">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.pouzit_zboz1">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.pouzit_zboz1Specified">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.pouzit_zboz2">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.pouzit_zboz2Specified">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.pouzit_zboz3">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.pouzit_zboz3Specified">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.urceno_cerp_zuct">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.urceno_cerp_zuctSpecified">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.cerp_zuct">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.cerp_zuctSpecified">
+            <remarks/>
+        </member>
+        <member name="P:EETWrapper.EETService_v311.TrzbaDataType.rezim">
+            <remarks/>
+        </member>
+        <member name="M:EETWrapper.ServiceHelpers.EETMessageFormatter.DeserializeReply(System.ServiceModel.Channels.Message,System.Object[])">
+            <summary>
+            Parsing according to http://www.thefrankes.com/wp/?p=2343
+            </summary>
+            <param name="message"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

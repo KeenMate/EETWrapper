@@ -7,3 +7,11 @@
 /EETWrapper/bin/Debug
 /EETWrapper/obj/Debug
 /.vs
+/EETWrapper/obj/Release
+/EETWrapper/bin/Release
+/EETTester/bin/Release
+/EETTester/obj/Release
+/EETTester.vshost.exe.manifest
+/EETTester.vshost.exe.config
+/EETTester.exe.config
+/CustomTextMessageEncoder/obj/Release
