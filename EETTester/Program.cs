@@ -72,7 +72,6 @@ namespace EETTester
 			//data.AdditionalData.TotalAmountExemptedFromVAT = 3036.00M;
 
 			var response = provider.SendData(data);
-
 		}
 
 		private static void Provider_OnLogChange(object sender, EETWrapper.Data.LogEventArgs e)
