@@ -20,7 +20,7 @@ namespace EETWrapper
 		/// <summary>
 		/// Date and time of sending
 		/// </summary>
-		public DateTime CreationDate { get; } = DateTime.Now;
+		public DateTime CreationDate { get; set; } = DateTime.Now;
 
 		/// <summary>
 		/// Flag of verification sending mode  
