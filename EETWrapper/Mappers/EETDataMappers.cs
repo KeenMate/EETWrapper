@@ -15,7 +15,7 @@ namespace EETWrapper.Mappers
 			TrzbaHlavickaType hlavicka = new TrzbaHlavickaType();
 			hlavicka.prvni_zaslani = data.FirstTry;
 			hlavicka.uuid_zpravy = data.UUID.ToString();
-			hlavicka.dat_odesl = data.CreationDate;
+			hlavicka.dat_odesl = DateTime.Now;
 			hlavicka.overeni = data.TestRun;
 			hlavicka.overeniSpecified = true;
 

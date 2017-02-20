@@ -45,7 +45,7 @@ namespace EETTester
 			data.BusinessPremisesID = 11;
 			data.CashRegisterID = "B1/1";
 			data.ReceiptID = "B1/1/1";
-
+			data.CreationDate = DateTime.Now.AddDays(-10);
 			data.TotalAmountOfSale = 1M;
 
 			//data.AdditionalData = new AdditionalData();
