@@ -15,28 +15,40 @@ using EETWrapper;
 using EETWrapper.Data;
 using EETWrapper.EETService_v311;
 using EETWrapper.ServiceHelpers;
+using NLog;
 
 namespace EETTester
 {
 	class Program
 	{
+		private static ILogger logger = LogManager.GetCurrentClassLogger();
+
 		static void Main(string[] args)
 		{
+			logger.Info("### Starting a new run of EETTester");
+
 			System.Net.ServicePointManager.ServerCertificateValidationCallback +=
 					(se, cert, chain, sslerror) =>
 					{
 						return true;
 					};
 
-			sendThroughProvider();
-
+			try
+			{
+				sendThroughProvider();
+				logger.Info("### Test run ended succesfully");
+			}
+			catch (Exception ex)
+			{
+				logger.Error(ex, "### Test run failed");
+			}
 		}
 
 		static void sendThroughProvider()
 		{
-			EETProvider provider = new EETProvider("CZ26791706");
-
+			EETProvider provider = new EETProvider();
 			provider.OnLogChange += Provider_OnLogChange;
+			provider.SetCertificate("CZ26791706");
 
 			EETData data = new EETData();
 			data.TestRun = true;
@@ -81,22 +93,25 @@ namespace EETTester
 			switch (e.LogLevel)
 			{
 				case LogEventArgs.LogLevels.Info:
-					Console.Write(header);
-					Console.WriteLine(e.Message);
+					logger.Info(e.Message);
+					//Console.Write(header);
+					//Console.WriteLine(e.Message);
 					break;
 				case LogEventArgs.LogLevels.Warn:
-					Console.Write(header);
-					ConsoleHelper.WriteLineColoredText(ConsoleColor.Yellow, e.Message);
+					logger.Warn(e.Message);
+					//Console.Write(header);
+					//ConsoleHelper.WriteLineColoredText(ConsoleColor.Yellow, e.Message);
 					break;
 				case LogEventArgs.LogLevels.Error:
-					Console.Write(header);
-					ConsoleHelper.WriteLineColoredText(ConsoleColor.Red, e.Message);
-					ConsoleHelper.WriteLineColoredText(ConsoleColor.Red, e.Exception.ToString());
+					logger.Error(e.Exception, e.Message);
+					//Console.Write(header);
+					//ConsoleHelper.WriteLineColoredText(ConsoleColor.Red, e.Message);
+					//ConsoleHelper.WriteLineColoredText(ConsoleColor.Red, e.Exception.ToString());
 					break;
 				case LogEventArgs.LogLevels.Trace:
-					Console.Write(header);
-					ConsoleHelper.WriteLineColoredText(ConsoleColor.DarkGray, e.Message);
-
+					logger.Trace(e.Message);
+					//Console.Write(header);
+					//ConsoleHelper.WriteLineColoredText(ConsoleColor.DarkGray, e.Message);
 					break;
 				default:
 					throw new ArgumentOutOfRangeException();

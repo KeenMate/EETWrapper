@@ -28,9 +28,14 @@ namespace EETWrapper
 			ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 		}
 
+		public EETProvider()
+		{
+			
+		}
+
 		public EETProvider(string certName)
 		{
-			taxpayersCertificate = fetchCertificate(certName);
+			SetCertificate(certName);
 		}
 
 		public EETProvider(X509Certificate2 taxpayersCertificate, string customEndPointName)
@@ -49,6 +54,12 @@ namespace EETWrapper
 			if (taxpayersCertificate == null)
 				throw new ArgumentOutOfRangeException(nameof(taxpayersCertificate), Exceptions.CertificateCannotNotBeNull);
 			this.taxpayersCertificate = taxpayersCertificate;
+		}
+
+		public void SetCertificate(string certName)
+		{
+			logInfo(Messages.CertificateLookup.Fill(certName));
+			taxpayersCertificate = fetchCertificate(certName);
 		}
 
 		#region Private
