@@ -48,11 +48,11 @@ namespace EETTester
 		{
 			EETProvider provider = new EETProvider();
 			provider.OnLogChange += Provider_OnLogChange;
-			provider.SetCertificate("CZ26791706");
+			provider.SetCertificate("CZ00000019");
 
 			EETData data = new EETData();
-			data.TestRun = true;
-			data.TaxID = "CZ26791706";
+			data.TestRun = false;
+			data.TaxID = "CZ00000019";
 			//data.AppointingPayerTaxID = "CZ683555118";
 			data.BusinessPremisesID = 11;
 			data.CashRegisterID = "B1/1";
