@@ -13,7 +13,7 @@ namespace EETWrapper.ServiceHelpers
 		private readonly Message message;
 		private readonly object[] parameters;
 
-		public static IFormatProvider EETDecimalFormat = new NumberFormatInfo() { CurrencyDecimalSeparator = "." };
+		public static IFormatProvider EETDecimalFormat = new NumberFormatInfo() { CurrencyDecimalSeparator = ".", CurrencyDecimalDigits = 2, NumberDecimalDigits = 2};
 		public const string EETDateFormat = "yyyy-MM-ddTHH:mm:ssK";
 
 

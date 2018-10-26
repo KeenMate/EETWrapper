@@ -51,6 +51,11 @@
               resource lookups using this strongly typed resource class.
             </summary>
         </member>
+        <member name="P:EETWrapper.Assets.Messages.CertificateLookup">
+            <summary>
+              Looks up a localized string similar to About to lookup for the certificate {0}.
+            </summary>
+        </member>
         <member name="P:EETWrapper.Assets.Messages.OpeningPersonalCurrentUserCertStore">
             <summary>
               Looks up a localized string similar to Opening personal certificate store of current user.

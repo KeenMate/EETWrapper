@@ -8,13 +8,13 @@ namespace EETWrapper
 	public class EETResponse
 	{
 		private readonly string message;
-		public ResultTypes Type { get; private set; }
+		public ResultTypes Type { get; }
 
-		public Guid UUID { get; private set; }
+		public Guid UUID { get; }
 
-		public string Message { get; private set; }
+		public string Message { get; set; }
 
-		public List<EETWarning> Warnings { get; private set; }
+		public List<EETWarning> Warnings { get; } = new List<EETWarning>(5);
 
 		public bool TestRun { get; set; }
 
@@ -54,13 +54,21 @@ namespace EETWrapper
 
 	public class EETWarning
 	{
-		public int Code { get; private set; }
-		public string Text { get; private set; }
+		public bool IsError { get; }
+		public int Code { get; }
+		public string Text { get; }
 
-		public WarningTypes Type => (WarningTypes) Code;
+		public WarningTypes WarningType => (WarningTypes) Code;
 
-		public EETWarning(int code, string text)
+		public ErrorTypes ErrorType => (ErrorTypes) Code;
+
+		public EETWarning(int code, string text) : this(false, code, text)
 		{
+		}
+
+		public EETWarning(bool isError, int code, string text)
+		{
+			IsError = isError;
 			Code = code;
 			Text = text;
 		}

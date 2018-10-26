@@ -14,6 +14,7 @@ using EETTester.Helpers;
 using EETWrapper;
 using EETWrapper.Data;
 using EETWrapper.EETService_v311;
+using EETWrapper.Extensions;
 using EETWrapper.ServiceHelpers;
 using NLog;
 
@@ -46,19 +47,18 @@ namespace EETTester
 
 		static void sendThroughProvider()
 		{
-			EETProvider provider = new EETProvider();
-			provider.OnLogChange += Provider_OnLogChange;
-			provider.SetCertificate("CZ00000019");
+			var correlationId = Guid.NewGuid();
+
+			EETProvider provider = new EETProvider(correlationId, new NlogLogger(), Configuration.CertificateName);
 
 			EETData data = new EETData();
 			data.TestRun = false;
-			data.TaxID = "CZ00000019";
-			//data.AppointingPayerTaxID = "CZ683555118";
-			data.BusinessPremisesID = 11;
-			data.CashRegisterID = "B1/1";
-			data.ReceiptID = "B1/1/1";
-			data.CreationDate = DateTime.Now.AddDays(-10);
-			data.TotalAmountOfSale = 1M;
+			data.TaxID = Configuration.CertificateName;
+			data.BusinessPremisesID = Configuration.BusinessPremisesId;
+			data.CashRegisterID = Configuration.CashRegisterId;
+			data.ReceiptID = Configuration.ReceiptIdFormat.Fill(Configuration.CashRegisterId, 1);
+			data.CreationDate = DateTime.Now; //new DateTime(2018, 8, 18, 15, 12, 7);
+			data.TotalAmountOfSale = 0;
 
 			//data.AdditionalData = new AdditionalData();
 
@@ -72,8 +72,8 @@ namespace EETTester
 
 			//data.AdditionalData.TotalAmountOfPaymentsForSubsequentDrawingOrSettlement = 324;
 
-			//data.AdditionalData.TotalTaxBase_BasicVATRate = -820.92M;
-			//data.AdditionalData.TotalVAT_BasicVATRate = -172.39M;
+			//data.AdditionalData.TotalTaxBase_BasicVATRate = 343.50M;
+			//data.AdditionalData.TotalVAT_BasicVATRate = 51.50M;
 
 			//data.AdditionalData.TotalTaxBase_FirstReducedVATRate = -3538.20M;
 			//data.AdditionalData.TotalVAT_FirstReducedVATRate = -530.73M;

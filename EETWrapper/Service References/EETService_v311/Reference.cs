@@ -1161,7 +1161,7 @@ namespace EETWrapper.EETService_v311 {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://fs.mfcr.cz/eet/schema/v3", Order=2)]
         [System.Xml.Serialization.XmlElementAttribute("Varovani")]
-        public EETWrapper.EETService_v311.OdpovedVarovaniType[] Varovani;
+        public EETWrapper.EETService_v311.OdpovedVarovaniType[] Varovani = new OdpovedVarovaniType[] { };
         
         public OdeslaniTrzbyResponse() {
         }

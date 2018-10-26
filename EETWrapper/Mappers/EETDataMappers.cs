@@ -4,13 +4,28 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using EETWrapper.EETService_v311;
+using EETWrapper.Interfaces;
 using EETWrapper.ServiceHelpers;
 
 namespace EETWrapper.Mappers
 {
-	internal static class EETDataMappers
+	internal class EETDataMappers
 	{
-		public static TrzbaHlavickaType GetRequestHeader(this EETData data)
+		private readonly Guid correlationId;
+		private readonly ILogger logger;
+		private readonly X509Certificate2 taxpayersCertificate;
+		private readonly EETData data;
+
+		public EETDataMappers(Guid correlationId, ILogger logger, X509Certificate2 taxpayersCertificate, EETData data)
+		{
+			this.correlationId = correlationId;
+			this.logger = logger;
+			this.taxpayersCertificate = taxpayersCertificate;
+			this.data = data;
+		}
+
+
+		public TrzbaHlavickaType GetRequestHeader()
 		{
 			TrzbaHlavickaType hlavicka = new TrzbaHlavickaType();
 			hlavicka.prvni_zaslani = data.FirstTry;
@@ -22,7 +37,7 @@ namespace EETWrapper.Mappers
 			return hlavicka;
 		}
 
-		public static TrzbaDataType GetRequestBody(this EETData data)
+		public TrzbaDataType GetRequestBody()
 		{
 			TrzbaDataType body = new TrzbaDataType();
 
@@ -119,19 +134,17 @@ namespace EETWrapper.Mappers
 					body.cerp_zuctSpecified = true;
 				}
 			}
-
-
-
+			
 			return body;
 		}
 
-		public static TrzbaKontrolniKodyType GetRequestCheckCodes(this EETData data, X509Certificate2 taxpayersCertificate)
+		public TrzbaKontrolniKodyType GetRequestCheckCodes()
 		{
 			TrzbaKontrolniKodyType checkCodes = new TrzbaKontrolniKodyType();
 
 			checkCodes.pkp = new PkpElementType();
 
-			var pkp = generatePKP(taxpayersCertificate, data);
+			var pkp = generatePKP(taxpayersCertificate);
 
 			checkCodes.pkp.Text = new[] {Convert.ToBase64String(pkp, Base64FormattingOptions.None)};
 
@@ -144,18 +157,18 @@ namespace EETWrapper.Mappers
 			return checkCodes;
 		}
 
-		public static OdeslaniTrzbyRequest GetRequestData(this EETData data, X509Certificate2 taxpayersCertificate)
+		public OdeslaniTrzbyRequest GetRequestData()
 		{
-			return new OdeslaniTrzbyRequest(data.GetRequestHeader(), data.GetRequestBody(),
-				data.GetRequestCheckCodes(taxpayersCertificate));
+			return new OdeslaniTrzbyRequest(GetRequestHeader(), GetRequestBody(),
+				GetRequestCheckCodes());
 		}
 
-		public static EETResponse GetResponse(OdpovedHlavickaType response)
+		public EETResponse GetResponse(OdpovedHlavickaType response)
 		{
 			return new EETResponse();
 		}
 
-		public static EETResponse GetResponseFromAsync(OdeslaniTrzbyResponse response)
+		public EETResponse GetResponseFromAsync(OdeslaniTrzbyResponse response)
 		{
 			return new EETResponse();
 		}
@@ -175,12 +188,14 @@ namespace EETWrapper.Mappers
 			return hex.ToString();
 		}
 
-		private static byte[] generatePKP(X509Certificate2 certificate, EETData data)
+		private byte[] generatePKP(X509Certificate2 certificate)
 		{
 			//http://stackoverflow.com/questions/7444586/how-can-i-sign-a-file-using-rsa-and-sha256-with-net
 			string sign =
-					$"{data.TaxID}|{data.BusinessPremisesID}|{data.CashRegisterID}|{data.ReceiptID}|{data.CreationDate.ToString("yyyy-MM-ddTHH:mm:sszzz").Replace("+03:00", "+02:00")}|{data.TotalAmountOfSale.ToString(EETMessage.EETDecimalFormat)}";
+					$"{data.TaxID}|{data.BusinessPremisesID}|{data.CashRegisterID}|{data.ReceiptID}|{data.CreationDate.ToString("yyyy-MM-ddTHH:mm:sszzz").Replace("+03:00", "+02:00")}|{ string.Format(EETMessage.EETDecimalFormat, "{0:N}", data.TotalAmountOfSale)}";
 
+			logger.Debug($"{correlationId} - Calculating PKP form string {sign}");
+			
 
 			// Note that this will return a Basic crypto provider, with only SHA-1 support
 			var privKey = (RSACryptoServiceProvider)certificate.PrivateKey;
