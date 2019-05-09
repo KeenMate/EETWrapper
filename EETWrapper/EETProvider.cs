@@ -21,7 +21,7 @@ namespace EETWrapper
 		private X509Certificate2 taxpayersCertificate;
 		private readonly string customEndPointName;
 
-		public event EventHandler<LogEventArgs> OnLogChange;
+		//public event EventHandler<LogEventArgs> OnLogChange;
 
 		static EETProvider()
 		{
@@ -139,7 +139,7 @@ namespace EETWrapper
 				{
 					OdpovedPotvrzeniType o = (OdpovedPotvrzeniType)response;
 					logger.Info(Messages.ReceivedSuccess.Fill(o.fik, odpoved.bkp));
-					eetResponse = new EETResponse(ResultTypes.Success, new Guid(odpoved.uuid_zpravy));
+					eetResponse = new EETResponse(warnings?.Length>0?ResultTypes.SuccessWithWarnings:ResultTypes.Success, new Guid(odpoved.uuid_zpravy));
 					eetResponse.Warnings.AddRange(mapWarnings(warnings));
 					eetResponse.ResponseTime = odpoved.dat_prij;
 					eetResponse.Fik = o.fik;
@@ -167,7 +167,7 @@ namespace EETWrapper
 
 		private static IEnumerable<EETWarning> mapWarnings(OdpovedVarovaniType[] varovani, bool isError = false)
 		{
-			return varovani.Select(warning =>
+			return varovani?.Select(warning =>
 				new EETWarning(isError, warning.kod_varov, warning.Text?.Aggregate((f, s) => $"{f}; {s}")));
 		}
 

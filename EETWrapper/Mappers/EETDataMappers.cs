@@ -1,11 +1,11 @@
-﻿using System;
+﻿using EETWrapper.EETService_v311;
+using EETWrapper.Interfaces;
+using EETWrapper.ServiceHelpers;
+using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using EETWrapper.EETService_v311;
-using EETWrapper.Interfaces;
-using EETWrapper.ServiceHelpers;
 
 namespace EETWrapper.Mappers
 {
@@ -48,7 +48,7 @@ namespace EETWrapper.Mappers
 			body.porad_cis = data.ReceiptID;
 
 			body.dat_trzby = data.CreationDate;
-			body.rezim = (int) data.SaleRegime;
+			body.rezim = (int)data.SaleRegime;
 
 			body.celk_trzba = data.TotalAmountOfSale;
 
@@ -134,7 +134,7 @@ namespace EETWrapper.Mappers
 					body.cerp_zuctSpecified = true;
 				}
 			}
-			
+
 			return body;
 		}
 
@@ -146,13 +146,13 @@ namespace EETWrapper.Mappers
 
 			var pkp = generatePKP(taxpayersCertificate);
 
-			checkCodes.pkp.Text = new[] {Convert.ToBase64String(pkp, Base64FormattingOptions.None)};
+			checkCodes.pkp.Text = new[] { Convert.ToBase64String(pkp, Base64FormattingOptions.None) };
 
 			var bkp = SHA1Hash(pkp);
 			bkp =
 				$"{bkp.Substring(0, 8)}-{bkp.Substring(8, 8)}-{bkp.Substring(16, 8)}-{bkp.Substring(24, 8)}-{bkp.Substring(32, 8)}";
 			checkCodes.bkp = new BkpElementType();
-			checkCodes.bkp.Text = new[] {bkp};
+			checkCodes.bkp.Text = new[] { bkp };
 
 			return checkCodes;
 		}
@@ -174,7 +174,7 @@ namespace EETWrapper.Mappers
 		}
 
 
-	static string SHA1Hash(byte[] input)
+		static string SHA1Hash(byte[] input)
 		{
 			var hash = (new SHA1Managed()).ComputeHash(input);
 			return string.Join("", hash.Select(b => b.ToString("x2")).ToArray());
@@ -184,18 +184,23 @@ namespace EETWrapper.Mappers
 		{
 			StringBuilder hex = new StringBuilder(ba.Length * 2);
 			foreach (byte b in ba)
+			{
 				hex.AppendFormat("{0:x2}", b);
+			}
+
 			return hex.ToString();
 		}
 
 		private byte[] generatePKP(X509Certificate2 certificate)
 		{
+			// 2019-05-07T19:11:31+02:00
+			var date = $@"{data.CreationDate.ToUniversalTime():yyyy-MM-ddTHH:mm:ss}{data.CreationDate:zzz}";
+
 			//http://stackoverflow.com/questions/7444586/how-can-i-sign-a-file-using-rsa-and-sha256-with-net
 			string sign =
-					$"{data.TaxID}|{data.BusinessPremisesID}|{data.CashRegisterID}|{data.ReceiptID}|{data.CreationDate.ToString("yyyy-MM-ddTHH:mm:sszzz").Replace("+03:00", "+02:00")}|{ string.Format(EETMessage.EETDecimalFormat, "{0:N}", data.TotalAmountOfSale)}";
+				$"{data.TaxID}|{data.BusinessPremisesID}|{data.CashRegisterID}|{data.ReceiptID}|{date}|{string.Format(EETMessage.EETDecimalFormat, "{0:N}", data.TotalAmountOfSale)}";
 
 			logger.Debug($"{correlationId} - Calculating PKP form string {sign}");
-			
 
 			// Note that this will return a Basic crypto provider, with only SHA-1 support
 			var privKey = (RSACryptoServiceProvider)certificate.PrivateKey;
@@ -206,7 +211,7 @@ namespace EETWrapper.Mappers
 			using (RSACryptoServiceProvider key = new RSACryptoServiceProvider(cspparams))
 			{
 				//Sign the data
-				byte[] sig = key.SignData(UTF8Encoding.UTF8.GetBytes(sign), CryptoConfig.MapNameToOID("SHA256"));
+				byte[] sig = key.SignData(Encoding.UTF8.GetBytes(sign), CryptoConfig.MapNameToOID("SHA256"));
 
 				return sig;
 			}

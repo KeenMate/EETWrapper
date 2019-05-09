@@ -161,7 +161,7 @@
             The date and time of sale is far in the past
             </summary>
         </member>
-        <member name="M:EETWrapper.EETProvider.#ctor(System.Security.Cryptography.X509Certificates.X509Certificate2)">
+        <member name="M:EETWrapper.EETProvider.#ctor(System.Guid,EETWrapper.Interfaces.ILogger,System.Security.Cryptography.X509Certificates.X509Certificate2)">
             <summary>
             X509 taxpayer's certificate
             </summary>
