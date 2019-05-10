@@ -34,8 +34,12 @@ namespace EETWrapper.ServiceHelpers
 			}
 			else if (value is DateTime)
 			{
-				v = ((DateTime)value).ToString(EETMessage.EETDateFormat);
-			}
+                // 2019-05-07T19:11:31+02:00
+                var data = ((DateTime) value);
+
+                var date = $@"{data.ToUniversalTime():yyyy-MM-ddTHH:mm:ss}{data:zzz}";
+                v = date;
+            }
 			else if (value is decimal)
 			{
 				v = ((decimal)value).ToString("F2", EETMessage.EETDecimalFormat);

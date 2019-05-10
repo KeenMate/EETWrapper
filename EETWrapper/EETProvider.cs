@@ -3,6 +3,7 @@ using EETWrapper.Data;
 using EETWrapper.EETService_v311;
 using EETWrapper.Extensions;
 using EETWrapper.Interfaces;
+using EETWrapper.Mappers;
 using EETWrapper.SignatureBehavior;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,6 @@ using System.Linq;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-using EETWrapper.Mappers;
 
 namespace EETWrapper
 {
@@ -20,8 +20,6 @@ namespace EETWrapper
 		private readonly ILogger logger;
 		private X509Certificate2 taxpayersCertificate;
 		private readonly string customEndPointName;
-
-		//public event EventHandler<LogEventArgs> OnLogChange;
 
 		static EETProvider()
 		{
@@ -53,7 +51,10 @@ namespace EETWrapper
 		public EETProvider(Guid correlationId, ILogger logger, X509Certificate2 taxpayersCertificate) : this(correlationId, logger)
 		{
 			if (taxpayersCertificate == null)
+			{
 				throw new ArgumentOutOfRangeException(nameof(taxpayersCertificate), Exceptions.CertificateCannotNotBeNull);
+			}
+
 			this.taxpayersCertificate = taxpayersCertificate;
 		}
 
@@ -117,12 +118,9 @@ namespace EETWrapper
 				logger.Trace($"{correlationId} - Preparing WCF client");
 				var client = prepareClient();
 
-				object response;
-				OdpovedVarovaniType[] warnings;
-
 				var dataMapper = new EETDataMappers(correlationId, logger, taxpayersCertificate, data);
 
-				var odpoved = client.OdeslaniTrzby(dataMapper.GetRequestHeader(), dataMapper.GetRequestBody(), dataMapper.GetRequestCheckCodes(), out response, out warnings);
+				var odpoved = client.OdeslaniTrzby(dataMapper.GetRequestHeader(), dataMapper.GetRequestBody(), dataMapper.GetRequestCheckCodes(), out object response, out OdpovedVarovaniType[] warnings);
 
 				if (response is OdpovedChybaType)
 				{
@@ -139,14 +137,14 @@ namespace EETWrapper
 				{
 					OdpovedPotvrzeniType o = (OdpovedPotvrzeniType)response;
 					logger.Info(Messages.ReceivedSuccess.Fill(o.fik, odpoved.bkp));
-					eetResponse = new EETResponse(warnings?.Length>0?ResultTypes.SuccessWithWarnings:ResultTypes.Success, new Guid(odpoved.uuid_zpravy));
+					eetResponse = new EETResponse(warnings?.Length > 0 ? ResultTypes.SuccessWithWarnings : ResultTypes.Success, new Guid(odpoved.uuid_zpravy));
 					eetResponse.Warnings.AddRange(mapWarnings(warnings));
 					eetResponse.ResponseTime = odpoved.dat_prij;
 					eetResponse.Fik = o.fik;
 					eetResponse.Bkp = odpoved.bkp;
 					eetResponse.TestRun = o.test;
 
-					eetResponse.Warnings.ForEach(x=> logger.Warn($"{correlationId} - Call's warning: {x.Code} - {x.Text}"));
+					eetResponse.Warnings.ForEach(x => logger.Warn($"{correlationId} - Call's warning: {x.Code} - {x.Text}"));
 				}
 
 				return eetResponse;
