@@ -1,6 +1,6 @@
+using EETWrapper.EETService_v311;
 using System;
 using System.Xml;
-using EETWrapper.EETService_v311;
 
 
 namespace EETWrapper.ServiceHelpers
@@ -9,8 +9,10 @@ namespace EETWrapper.ServiceHelpers
 	{
 		public static void WriteElement(this XmlDictionaryWriter writer, string name, Action<XmlDictionaryWriter> insideElement, string ns = "")
 		{
-			if(string.IsNullOrEmpty(ns))
+			if (string.IsNullOrEmpty(ns))
+			{
 				writer.WriteStartElement(name);
+			}
 			else
 			{
 				writer.WriteStartElement(name, ns);
@@ -34,12 +36,12 @@ namespace EETWrapper.ServiceHelpers
 			}
 			else if (value is DateTime)
 			{
-                // 2019-05-07T19:11:31+02:00
-                var data = ((DateTime) value);
+				// 2019-05-07T19:11:31+02:00
+				var data = ((DateTime)value);
 
-                var date = $@"{data.ToUniversalTime():yyyy-MM-ddTHH:mm:ss}{data:zzz}";
-                v = date;
-            }
+				var date = $@"{data.ToUniversalTime():yyyy-MM-ddTHH:mm:ss}{data:zzz}";
+				v = date;
+			}
 			else if (value is decimal)
 			{
 				v = ((decimal)value).ToString("F2", EETMessage.EETDecimalFormat);
@@ -52,7 +54,7 @@ namespace EETWrapper.ServiceHelpers
 			{
 				v = value.ToString().ToLower();
 			}
-			
+
 			writer.WriteAttributeString(key, v);
 		}
 	}
