@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 using System.Xml.XPath;
 using EETWrapper.Data;
 using EETWrapper.EETService_v311;
+using EETWrapper.Interfaces;
 
 namespace EETWrapper.ServiceHelpers
 {
@@ -35,6 +36,7 @@ namespace EETWrapper.ServiceHelpers
 		/// <returns></returns>
 		public object DeserializeReply(Message message, object[] parameters)
 		{
+			LoggerInstance.Logger?.Debug("Deserializing EET response");
 			OdeslaniTrzbyResponse response = new OdeslaniTrzbyResponse();
 
 			XPathDocument doc = new XPathDocument(message.GetReaderAtBodyContents());
@@ -65,6 +67,7 @@ namespace EETWrapper.ServiceHelpers
 			var validResponse = nav.SelectSingleNode("eet:Odpoved/eet:Potvrzeni", manager);
 			if (validResponse != null)
 			{
+				LoggerInstance.Logger?.Debug("EET response is successful");
 				//<eet:Potvrzeni fik="9e8e30cd-3d31-4aab-92ad-30ca0912689a-ff" test="true" xmlns:eet="http://fs.mfcr.cz/eet/schema/v3" />
 
 				var odpovedPotvrzeniType = new OdpovedPotvrzeniType();
@@ -94,6 +97,8 @@ namespace EETWrapper.ServiceHelpers
 			}
 			else
 			{
+				LoggerInstance.Logger?.Debug("EET response is with errors");
+
 				var errorResponse = nav.SelectSingleNode("eet:Odpoved/eet:Chyba", manager);
 				if (errorResponse != null)
 				{

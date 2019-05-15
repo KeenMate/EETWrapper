@@ -194,7 +194,7 @@ namespace EETWrapper.Mappers
 		private byte[] generatePKP(X509Certificate2 certificate)
 		{
 			// 2019-05-07T19:11:31+02:00
-			var date = $@"{data.CreationDate.ToUniversalTime():yyyy-MM-ddTHH:mm:ss}{data.CreationDate:zzz}";
+			var date = $@"{data.CreationDate:yyyy-MM-ddTHH:mm:ssK}";
 
 			//http://stackoverflow.com/questions/7444586/how-can-i-sign-a-file-using-rsa-and-sha256-with-net
 			string sign =

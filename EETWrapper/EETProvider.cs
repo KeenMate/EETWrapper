@@ -14,6 +14,11 @@ using System.Threading.Tasks;
 
 namespace EETWrapper
 {
+	internal class LoggerInstance
+	{
+		public static ILogger Logger { get; set; }
+	}
+
 	public class EETProvider
 	{
 		private readonly Guid correlationId;
@@ -29,7 +34,7 @@ namespace EETWrapper
 		public EETProvider(Guid correlationId, ILogger logger)
 		{
 			this.correlationId = correlationId;
-			this.logger = logger;
+			LoggerInstance.Logger = this.logger = logger;
 		}
 
 		public EETProvider(Guid correlationId, ILogger logger, string certName) : this(correlationId, logger)
@@ -43,19 +48,15 @@ namespace EETWrapper
 			this.customEndPointName = customEndPointName;
 		}
 
-
 		/// <summary>
 		/// X509 taxpayer's certificate
 		/// </summary>
+		/// <param name="correlationId"></param>
+		/// <param name="logger"></param>
 		/// <param name="taxpayersCertificate"></param>
 		public EETProvider(Guid correlationId, ILogger logger, X509Certificate2 taxpayersCertificate) : this(correlationId, logger)
 		{
-			if (taxpayersCertificate == null)
-			{
-				throw new ArgumentOutOfRangeException(nameof(taxpayersCertificate), Exceptions.CertificateCannotNotBeNull);
-			}
-
-			this.taxpayersCertificate = taxpayersCertificate;
+			this.taxpayersCertificate = taxpayersCertificate ?? throw new ArgumentOutOfRangeException(nameof(taxpayersCertificate), Exceptions.CertificateCannotNotBeNull);
 		}
 
 		protected void SetCertificate(string certName)

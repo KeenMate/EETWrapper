@@ -160,6 +160,8 @@ namespace EETWrapper.SignatureBehavior
 			XmlDictionaryReaderQuotas quotas = new XmlDictionaryReaderQuotas();
 			Encoding encoderWithoutBOM = new UTF8Encoding(false);
 
+			LoggerInstance.Logger?.Debug($"{doc.InnerXml}");
+
 			MemoryStream ms = new MemoryStream(encoderWithoutBOM.GetBytes(doc.InnerXml));
 
 			XmlDictionaryReader xdr = XmlDictionaryReader.CreateTextReader(ms, encoderWithoutBOM, quotas, null);
@@ -167,7 +169,6 @@ namespace EETWrapper.SignatureBehavior
 			//Create the new message, that has the digital signature in the header
 			Message newMessage = Message.CreateMessage(xdr, System.Int32.MaxValue, request.Version);
 			request = newMessage;
-
 			return null;
 		}
 

@@ -165,6 +165,8 @@
             <summary>
             X509 taxpayer's certificate
             </summary>
+            <param name="correlationId"></param>
+            <param name="logger"></param>
             <param name="taxpayersCertificate"></param>
         </member>
         <member name="P:EETWrapper.EETData.UUID">
