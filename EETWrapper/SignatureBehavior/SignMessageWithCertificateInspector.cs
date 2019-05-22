@@ -28,6 +28,7 @@ namespace EETWrapper.SignatureBehavior
 
 		public object BeforeSendRequest(ref Message request, IClientChannel channel)
 		{
+			LoggerInstance.Logger?.Trace("Converting message request");
 			MessageBuffer msgbuf = request.CreateBufferedCopy(int.MaxValue);
 			Message tmpMessage = msgbuf.CreateMessage();
 			XmlDictionaryReader fullBody = tmpMessage.GetReaderAtBodyContents();

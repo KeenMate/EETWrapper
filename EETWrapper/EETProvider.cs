@@ -35,10 +35,12 @@ namespace EETWrapper
 		{
 			this.correlationId = correlationId;
 			LoggerInstance.Logger = this.logger = logger;
+			logger?.Trace($"{correlationId} - Setting up EETWrapper provider");
 		}
 
 		public EETProvider(Guid correlationId, ILogger logger, string certName) : this(correlationId, logger)
 		{
+			logger?.Trace($"{correlationId} - Selected certificate name: {certName}");
 			SetCertificate(certName);
 		}
 
